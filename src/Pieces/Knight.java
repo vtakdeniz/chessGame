@@ -4,7 +4,7 @@ package Pieces;
 
 public class Knight extends Piece{
 
-   Knight(String color ){
+   public Knight(String color){
        super(color,"Knight",'n');
    }
 

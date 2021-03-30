@@ -1,7 +1,8 @@
 package BoardUtil;
 
-import Pieces.Rook;
+import Pieces.*;
 import Players.Player;
+import jdk.nashorn.internal.ir.CaseNode;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,11 +28,10 @@ public class Board {
     Map<Integer, Tile> IntPieces = new HashMap<>();
 
     public Board(){
-        tiles = new Tile[9][9];
+        tiles = new Tile[8][8];
 
         setTiles();
         setPieces();
-
     }
 
     public void setTiles(){
@@ -47,24 +47,35 @@ public class Board {
             }
 
         }
-        System.out.println(tiles[2][3].color);
 
     }
 
     public void printBoard(){
-        for (int i =tiles.length-1; i>0;i--){
+        for (int i =tiles.length-1; i>=0;i--){
             if(i%2!=0) System.out.print(ANSI_RED+"|"+RESET);
             else System.out.print("|"+RESET);
-            for (int j =tiles[i].length-1; j>0;j--){
+
+
+            for (int j =tiles[i].length-1; j>=0;j--){
 
                 if (tiles[i][j].color.equals("Black")){
-                    System.out.print(ANSI_RED+"|***|"+RESET);
+                    if (tiles[i][j].piece!=null)
+                    {
+                        System.out.print(ANSI_BLUE+"|*"+tiles[i][j].piece.getCode()+"*|"+RESET);
+                        tiles[i][j].piece.getCode();
+                    }
+                    else {
+                        System.out.print(ANSI_RED+"|***|"+RESET);
+                        }
+
                 }
                 else{
-                    System.out.print("|000|");
+                    if (tiles[i][j].piece!=null) System.out.print(ANSI_BLUE+"|-"+tiles[i][j].piece.getCode()+"-|");
+                    else System.out.print("|000|");
                 }
 
             }
+
 
             if(i%2==0) System.out.println(ANSI_RED+"|"+RESET);
             else System.out.println("|"+RESET);
@@ -74,6 +85,27 @@ public class Board {
 
     public void setPieces(){
         tiles[0][0].piece= new Rook("White");
+        tiles[0][1].piece= new Knight("White");
+        tiles[0][2].piece= new Bishop("White");
+        tiles[0][3].piece= new Queen("White");
+        tiles[0][4].piece= new King("White");
+        tiles[0][5].piece= new Bishop("White");
+        tiles[0][6].piece= new Knight("White");
+        tiles[0][7].piece= new Rook("White");
+
+        tiles[7][0].piece= new Rook("Black");
+        tiles[7][1].piece= new Knight("Black");
+        tiles[7][2].piece= new Bishop("Black");
+        tiles[7][3].piece= new Queen("Black");
+        tiles[7][4].piece= new King("Black");
+        tiles[7][5].piece= new Bishop("Black");
+        tiles[7][6].piece= new Knight("Black");
+        tiles[7][7].piece= new Rook("Black");
+
+        for (int i =0; i<8;i++){
+            tiles[1][i].piece=new Pawn("White");
+            tiles[6][i].piece=new Pawn("Black");
+        }
     }
 
 

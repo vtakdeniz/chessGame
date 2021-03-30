@@ -4,7 +4,7 @@ package Pieces;
 
 public class Queen extends Piece{
 
-    Queen(String color){
+    public Queen(String color){
         super(color,"Queen",'q');
     }
 
