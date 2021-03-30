@@ -1,11 +1,10 @@
 package Pieces;
 
 
-import java.awt.*;
 
 public class Rook extends Piece {
 
-    Rook(Color color)
+    public Rook(String color)
     {
         super(color,"Rook",'r');
     }

@@ -1,11 +1,9 @@
 package Pieces;
 
 
-import java.awt.*;
-
 public class Bishop extends Piece{
 
-    Bishop(Color color){
+    Bishop(String color){
         super(color,"Bishop",'c');
     }
 

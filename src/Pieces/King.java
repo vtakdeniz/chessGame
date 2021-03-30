@@ -1,11 +1,10 @@
 package Pieces;
 
 
-import java.awt.*;
 
 public class King extends Piece {
 
-        King(Color color){
+        King(String color){
             super(color,"King",'k');
          }
 

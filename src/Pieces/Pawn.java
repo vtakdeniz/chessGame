@@ -1,11 +1,10 @@
 package Pieces;
 
 
-import java.awt.*;
 
 public class Pawn extends Piece{
 
-    Pawn(Color color){
+    Pawn(String color){
         super(color,"Pawn",'p');
     }
 

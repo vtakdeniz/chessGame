@@ -1,18 +1,17 @@
 package Pieces;
 
 
-import java.awt.*;
 
 public class Piece {
     String name;
     char code;
     boolean isPlayed=false;
     int position;
-    Color color;
+    String color;
 
 
 
-    Piece(Color color, String name, char code){
+    Piece(String color, String name, char code){
         this.color=color;
         this.name=name;
         this.code=code;
@@ -31,7 +30,7 @@ public class Piece {
         return this.name;
     }
 
-    public Color getColor(){
+    public String getColor(){
         return this.color;
     }
 
