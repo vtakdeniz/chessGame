@@ -1,11 +1,12 @@
 package Pieces;
 
+
 import java.awt.*;
 
-    public class King extends Piece {
+public class King extends Piece {
 
-        King(Color color, String name, char code){
-            super(color,name,code);
+        King(Color color){
+            super(color,"King",'k');
          }
 
 }
