@@ -12,6 +12,7 @@ public class Tile {
     protected final int position;
     public Piece piece;
 
+
     public Tile(String color, int position) {
         this.color = color;
         this.position = position;

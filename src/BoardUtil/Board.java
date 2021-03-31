@@ -23,8 +23,6 @@ public class Board {
 
         setTiles();
         setPieces();
-        System.out.println(tiles[2][0].color);
-
     }
 
     public void setTiles(){
@@ -32,10 +30,10 @@ public class Board {
             for (int j =0; j<tiles[i].length;j++){
                 if ((i+j)%2==0)
                     {
-                    tiles[i][j]= new Tile(Color.ANSI_WHITE.getSelfColor(),(i+j+2));
+                    tiles[i][j]= new Tile(Color.ANSI_BLACK.getSelfColor(),(i+j+2));
                      }
                 else {
-                    tiles[i][j]= new Tile(Color.ANSI_BLACK.getSelfColor(),(i+j+2));
+                    tiles[i][j]= new Tile(Color.ANSI_WHITE.getSelfColor(),(i+j+2));
                      }
             }
 
@@ -46,7 +44,7 @@ public class Board {
     public void printBoard(){
          for (int i =tiles.length-1; i>=0;i--){
 
-            for (int j =tiles[i].length-1; j>=0;j--){
+            for (int j =0; j<tiles[i].length;j++){
                 tiles[i][j].printToTerminal();
             }
              System.out.println();
