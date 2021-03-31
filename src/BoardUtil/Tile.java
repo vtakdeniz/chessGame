@@ -8,12 +8,12 @@ public class Tile {
 
     public final int xcoordinate=0;
     public final int ycoordinate=0;
-    protected String color;
+    protected Color color;
     protected final int position;
     public Piece piece;
 
 
-    public Tile(String color, int position) {
+    public Tile(Color color, int position) {
         this.color = color;
         this.position = position;
     }
@@ -21,7 +21,7 @@ public class Tile {
     public void printToTerminal(){
 
         if (piece == null){
-            if (this.color.equals("BLACK")){
+            if (this.color==Color.ANSI_BLACK){
                 System.out.print(Color.ANSI_RED.getSelfAnsi()+"|***|");
             }
             else{
@@ -29,7 +29,7 @@ public class Tile {
             }
         }
         else{
-            if (piece.getColor().equals("BLACK")){
+            if (piece.getColor()==Color.ANSI_BLACK){
                 System.out.print(Color.ANSI_RED.getSelfAnsi()+"|*"+piece.getCode()+"*|");
             }
             else{

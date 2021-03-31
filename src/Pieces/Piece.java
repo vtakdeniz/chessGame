@@ -1,16 +1,18 @@
 package Pieces;
-
+import Util.Color;
 
 import sun.jvm.hotspot.runtime.StaticBaseConstructor;
+
+import java.security.PublicKey;
 
 public abstract class Piece {
     String name;
     char code;
     boolean isPlayed=false;
     int position;
-    String color;
+    public Color color;
 
-    Piece(String color, String name, char code){
+    Piece(Color color, String name, char code){
         this.color=color;
         this.name=name;
         this.code=code;
@@ -32,7 +34,7 @@ public abstract class Piece {
         return this.name;
     }
 
-    public String getColor(){
+    public Color getColor(){
         return this.color;
     }
 

@@ -1,11 +1,14 @@
 package Pieces;
 
+import Util.Color;
+
 
 
 public class Rook extends Piece {
 
-    public Rook(String color)
+    public Rook(Color color)
     {
         super(color,"Rook",'r');
     }
+
 }
