@@ -1,4 +1,4 @@
-import BoardUtil.Board;
+import Board.Board;
 import Util.Color;
 
 public class test {

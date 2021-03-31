@@ -1,4 +1,4 @@
-package BoardUtil;
+package Board;
 
 import Pieces.Piece;
 import Util.Color;
