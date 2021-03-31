@@ -24,14 +24,17 @@ public class Board {
 
     Tile tiles [][];
     Player currentPlayer;
-    Map<String, Tile> StringPieces = new HashMap<>();
-    Map<Integer, Tile> IntPieces = new HashMap<>();
+    Map<String, Tile> StringTiles = new HashMap<>();
+    Map<Integer, Tile> IntTiles = new HashMap<>();
 
     public Board(){
         tiles = new Tile[8][8];
 
         setTiles();
         setPieces();
+
+        IntTiles.put(4, tiles[1][0]);
+        System.out.println(IntTiles.get(4).color);
     }
 
     public void setTiles(){

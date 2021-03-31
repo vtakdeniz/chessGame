@@ -10,11 +10,17 @@ public class Tile {
     protected String color;
     protected final int position;
     public Piece piece;
-
+    
 
     public Tile(String color, int position) {
         this.color = color;
         this.position = position;
+    }
+
+    public void printToTerminal(){
+
+
+
     }
 
 

@@ -1,22 +1,24 @@
 package Pieces;
 
 
+import sun.jvm.hotspot.runtime.StaticBaseConstructor;
 
-public class Piece {
+public abstract class Piece {
     String name;
     char code;
     boolean isPlayed=false;
     int position;
     String color;
 
-
-
     Piece(String color, String name, char code){
         this.color=color;
         this.name=name;
         this.code=code;
         this.position=position;
+
     }
+
+
 
     public boolean isMoved(){
         return  this.isPlayed;
