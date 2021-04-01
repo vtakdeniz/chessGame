@@ -2,7 +2,6 @@ package Util;
 
 public enum  Color {
 
-     Call,
      ANSI_RESET ,
      ANSI_BLACK ,
      ANSI_RED ,
@@ -14,19 +13,19 @@ public enum  Color {
      ANSI_WHITE ,
      RESET ;
 
-     public String getSelfColor(){
+     public String getColor(){
 
-         return getColor(this);
+         return getCol(this);
      }
 
-    public String getSelfAnsi(){
+    public String getAnsi(){
 
-        return getAnsi(this);
+        return getAns(this);
     }
 
 
 
-    public String getColor(Color c){
+    public String getCol(Color c){
 
         switch (c){
 
@@ -56,7 +55,7 @@ public enum  Color {
     }
 
 
-    public String getAnsi(Color c){
+    public String getAns(Color c){
 
          switch (c){
 

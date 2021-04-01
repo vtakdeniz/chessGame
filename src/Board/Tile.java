@@ -9,7 +9,7 @@ public class Tile {
     public final int xcoordinate=0;
     public final int ycoordinate=0;
     protected Color color;
-    protected final int position;
+    public final int position;
     public Piece piece;
 
 
@@ -22,18 +22,18 @@ public class Tile {
 
         if (piece == null){
             if (this.color==Color.ANSI_BLACK){
-                System.out.print(Color.ANSI_RED.getSelfAnsi()+"|***|");
+                System.out.print(Color.ANSI_CYAN.getAnsi()+"|***|");
             }
             else{
-                System.out.print(Color.ANSI_WHITE.getSelfAnsi()+"|---|");
+                System.out.print(Color.ANSI_WHITE.getAnsi()+"|---|");
             }
         }
         else{
             if (piece.getColor()==Color.ANSI_BLACK){
-                System.out.print(Color.ANSI_RED.getSelfAnsi()+"|*"+piece.getCode()+"*|");
+                System.out.print(Color.ANSI_CYAN.getAnsi()+"|*"+piece.getCode()+"*|");
             }
             else{
-                System.out.print(Color.ANSI_WHITE.getSelfAnsi()+"|-"+piece.getCode()+"-|");
+                System.out.print(Color.ANSI_WHITE.getAnsi()+"|-"+piece.getCode()+"-|");
             }
         }
 
