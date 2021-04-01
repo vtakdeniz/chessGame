@@ -26,14 +26,14 @@ public class Pawn extends Piece{
 
         for (int i: moveVector) {
             Tile destinationTile = (Tile)tiles.get(tempPos+i);
-            if (destinationTile!=null&&destinationTile.piece==null){
+            if (destinationTile!=null&&destinationTile.piece==null&&destinationTile.position!=(currentPos-10)){
                     this.possibleMoves.add(new Move(currentTile,destinationTile,this,false));
             }
         }
 
         for (int i: attackVector) {
             Tile destinationTile = (Tile)tiles.get(tempPos+i);
-            if (destinationTile!=null&&destinationTile.piece==null){
+            if (destinationTile!=null&&destinationTile.piece!=null&&destinationTile.piece.getColor()!=this.color){
                 this.possibleMoves.add(new Move(currentTile,destinationTile,this,true));
             }
         }
@@ -41,7 +41,7 @@ public class Pawn extends Piece{
         if(!this.isPlayed){
             for (int i: enPassantVector) {
                 Tile destinationTile = (Tile)tiles.get(tempPos+i);
-                if (destinationTile!=null&&destinationTile.piece==null){
+                if (destinationTile!=null&&destinationTile.piece==null&&destinationTile.position!=(currentPos-10)){
                     this.possibleMoves.add(new Move(currentTile,destinationTile,this,false));
                 }
             }

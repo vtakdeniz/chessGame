@@ -16,7 +16,7 @@ public class test {
         Move m = new Move(b.getTilebyString("d1"),b.getTilebyString("d4"));
         m.executeMove();
         b.printBoard();
-        ArrayList a = b.getTilebyString("d4").piece.getPossibleMoves();
+        ArrayList a = b.getTilebyString("d2").piece.getPossibleMoves();
         for(int i=0;i<a.size();i++){
             Move move = (Move)a.get(i);
             System.out.println(move.destinationTile.position);

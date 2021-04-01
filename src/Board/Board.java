@@ -1,19 +1,12 @@
 package Board;
-
 import Pieces.*;
-import Players.Player;
 import Util.Color;
-
 import java.util.HashMap;
 import java.util.Map;
 
-
-
 public class Board {
 
-
     Tile tiles [][];
-    Player currentPlayer;
     public static Map<String, Tile> StringTiles = new HashMap<>();
     public static Map<Integer, Tile> IntTiles = new HashMap<>();
     public static Map<Piece,Tile> pieceTileMap = new HashMap<>();
@@ -84,8 +77,6 @@ public class Board {
             pieceTileMap.put(tiles[6][i].piece,tiles[6][i]);
         }
     }
-
-
 
     public void setPieces(){
         tiles[0][0].piece= new Rook(Color.ANSI_WHITE);
