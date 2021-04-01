@@ -3,13 +3,13 @@ import Pieces.*;
 import Util.Color;
 import java.util.HashMap;
 import java.util.Map;
-
+import Util.BoardUtil;
 public class Board {
 
     Tile tiles [][];
-    public static Map<String, Tile> StringTiles = new HashMap<>();
+    /*public static Map<String, Tile> StringTiles = new HashMap<>();
     public static Map<Integer, Tile> IntTiles = new HashMap<>();
-    public static Map<Piece,Tile> pieceTileMap = new HashMap<>();
+    public static Map<Piece,Tile> pieceTileMap = new HashMap<>();*/
     King kings[] = new King[2];
 
 
@@ -17,12 +17,16 @@ public class Board {
         tiles = new Tile[8][8];
         setTiles();
         setPieces();
-        setPieceTileMap();
+        //setPieceTileMap();
 
     }
 
-    public Tile getTilebyString(String tile){
-      return StringTiles.get(tile);
+   /* public Tile getTilebyString(String tile){
+      return BoardUtil.StringTiles.get(tile);
+    }*/
+
+    public Tile[][] getTiles(){
+        return this.tiles;
     }
 
     public void setTiles(){
@@ -34,14 +38,14 @@ public class Board {
                 if ((i+j)%2==0)
                     {
                     tiles[i][j]= new Tile(Color.ANSI_BLACK,tileNumber);
-                    IntTiles.put(tileNumber,tiles[i][j]);
-                    StringTiles.put((label+String.valueOf(i+1)),tiles[i][j]);
+                    /*IntTiles.put(tileNumber,tiles[i][j]);
+                    StringTiles.put((label+String.valueOf(i+1)),tiles[i][j]);*/
                     tileNumber++;
                      }
                 else {
                     tiles[i][j]= new Tile(Color.ANSI_WHITE,tileNumber);
-                    IntTiles.put(tileNumber,tiles[i][j]);
-                    StringTiles.put((label+String.valueOf(i+1)),tiles[i][j]);
+                   /* IntTiles.put(tileNumber,tiles[i][j]);
+                    StringTiles.put((label+String.valueOf(i+1)),tiles[i][j]);*/
                     tileNumber++;
                      }
                 label++;
@@ -52,17 +56,8 @@ public class Board {
 
     }
 
-    public void printBoard(){
-         for (int i =tiles.length-1; i>=0;i--){
 
-            for (int j =0; j<tiles[i].length;j++){
-                tiles[i][j].printToTerminal();
-            }
-             System.out.println();
-
-        }
-    }
-
+    /*
     public void setPieceTileMap(){
 
         for (int i =0;i< 8;i++){
@@ -76,7 +71,7 @@ public class Board {
             pieceTileMap.put(tiles[1][i].piece,tiles[1][i]);
             pieceTileMap.put(tiles[6][i].piece,tiles[6][i]);
         }
-    }
+    }  */
 
     public void setPieces(){
         tiles[0][0].piece= new Rook(Color.ANSI_WHITE);

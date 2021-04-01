@@ -13,10 +13,8 @@ public abstract class Piece {
     String name;
     char code;
     boolean isPlayed=false;
-    int position;
     public Color color;
     public int moveVector[];
-    public boolean canMoveCont;
     public ArrayList<Move> possibleMoves;
 
     public abstract ArrayList<Move> getPossibleMoves();
@@ -24,7 +22,6 @@ public abstract class Piece {
         this.color=color;
         this.name=name;
         this.code=code;
-        this.position=position;
         possibleMoves=new ArrayList<>();
     }
 

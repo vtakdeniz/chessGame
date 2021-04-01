@@ -25,7 +25,7 @@ public class Move {
         Piece p = this.startTile.piece;
         this.destinationTile.piece=p;
         this.startTile.piece=null;
-        Board.pieceTileMap.put(p,destinationTile);
+        BoardUtil.pieceTileMap.put(p,destinationTile);
     }
 
 

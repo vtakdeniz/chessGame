@@ -1,5 +1,6 @@
 package Pieces;
 import Board.Board;
+import Util.BoardUtil;
 import Util.Color;
 import Util.Move;
 import Board.Tile;
@@ -10,14 +11,13 @@ import java.util.Map;
 public class Bishop extends Piece{
 
     public int moveVector[]={ 11,9,-9,-11};
-    public boolean canMoveCont=true;
     public Bishop(Color color){
         super(color,"Bishop",'b');
     }
 
     public ArrayList<Move> getPossibleMoves(){
-        Map tiles = Board.IntTiles;
-        Tile currentTile = Board.pieceTileMap.get(this);
+        Map tiles = BoardUtil.IntTiles;
+        Tile currentTile = BoardUtil.pieceTileMap.get(this);
         int currentPos=currentTile.position;
         int tempPos=currentPos;
 

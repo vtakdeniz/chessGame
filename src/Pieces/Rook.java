@@ -1,6 +1,7 @@
 package Pieces;
 
 import Board.Board;
+import Util.BoardUtil;
 import Util.Color;
 import Util.Move;
 import Board.Tile;
@@ -10,7 +11,6 @@ import java.util.Map;
 
 public class Rook extends Piece {
 
-    public boolean canMoveCont=true;
     public int moveVector[]={ 1,-1,10,-10};
     public Rook(Color color)
     {
@@ -18,8 +18,8 @@ public class Rook extends Piece {
     }
 
     public ArrayList<Move> getPossibleMoves(){
-        Map tiles = Board.IntTiles;
-        Tile currentTile = Board.pieceTileMap.get(this);
+        Map tiles = BoardUtil.IntTiles;
+        Tile currentTile = BoardUtil.pieceTileMap.get(this);
         int currentPos=currentTile.position;
         int tempPos=currentPos;
 

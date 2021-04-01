@@ -1,6 +1,7 @@
 package Pieces;
 import Board.Board;
 import Board.Tile;
+import Util.BoardUtil;
 import Util.Color;
 import Util.Move;
 
@@ -12,14 +13,13 @@ public class King extends Piece {
 
         public Tile currentTile;
         public int moveVector[]={ 11,9,-9,-11 };
-        public boolean canMoveCont=false;
         public King(Color color){
             super(color,"King",'k');
          }
 
     public ArrayList<Move> getPossibleMoves(){
-        Map tiles = Board.IntTiles;
-        Tile currentTile = Board.pieceTileMap.get(this);
+        Map tiles = BoardUtil.IntTiles;
+        Tile currentTile = BoardUtil.pieceTileMap.get(this);
         int currentPos=currentTile.position;
         int tempPos=currentPos;
 

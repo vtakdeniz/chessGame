@@ -1,6 +1,7 @@
 package Pieces;
 import Board.Board;
 import Board.Tile;
+import Util.BoardUtil;
 import Util.Color;
 import Util.Move;
 
@@ -10,15 +11,14 @@ import java.util.Map;
 
 public class Knight extends Piece{
 
-    public boolean canMoveCont=false;
     public int moveVector[]={ 21,19,12,8,-21,-19,-12,-8 };
     public Knight(Color color){
        super(color,"Knight",'n');
    }
 
     public ArrayList<Move> getPossibleMoves(){
-        Map tiles = Board.IntTiles;
-        Tile currentTile = Board.pieceTileMap.get(this);
+        Map tiles = BoardUtil.IntTiles;
+        Tile currentTile = BoardUtil.pieceTileMap.get(this);
         int currentPos=currentTile.position;
         int tempPos=currentPos;
 
