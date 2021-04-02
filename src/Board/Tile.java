@@ -21,19 +21,19 @@ public class Tile {
     public void printToTerminal(){
 
         if (piece == null){
-            if (this.color==Color.ANSI_BLACK){
-                System.out.print(Color.ANSI_CYAN.getAnsi()+"|***|");
+            if (this.color==Color.BLACK){
+                System.out.print(Color.ANSI_CYAN.getAnsi()+"|***|"+Color.RESET.getAnsi());
             }
             else{
-                System.out.print(Color.ANSI_WHITE.getAnsi()+"|---|");
+                System.out.print(Color.WHITE.getAnsi()+"|---|"+Color.RESET.getAnsi());
             }
         }
         else{
-            if (piece.getColor()==Color.ANSI_BLACK){
-                System.out.print(Color.ANSI_CYAN.getAnsi()+"|*"+piece.getCode()+"*|");
+            if (piece.getColor()==Color.BLACK){
+                System.out.print(Color.ANSI_CYAN.getAnsi()+"|*"+piece.getCode()+"*|"+Color.RESET.getAnsi());
             }
             else{
-                System.out.print(Color.ANSI_WHITE.getAnsi()+"|-"+piece.getCode()+"-|");
+                System.out.print(Color.WHITE.getAnsi()+"|-"+piece.getCode()+"-|"+Color.RESET.getAnsi());
             }
         }
 

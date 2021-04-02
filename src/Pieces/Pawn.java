@@ -1,5 +1,4 @@
 package Pieces;
-import Board.Board;
 import Board.Tile;
 import Util.BoardUtil;
 import Util.Color;
@@ -19,6 +18,17 @@ public class Pawn extends Piece{
     }
 
     public ArrayList<Move> getPossibleMoves(){
+        this.setPossibleMoves();
+        return this.possibleMoves;
+    }
+
+    public Map<Integer, Tile> getPossibleMovesMap(){
+        this.setPossibleMoves();
+        return this.possibleMovesMap;
+    }
+
+    public void setPossibleMoves(){
+        this.possibleMoves.clear();
         Map tiles = BoardUtil.IntTiles;
         Tile currentTile = BoardUtil.pieceTileMap.get(this);
         int currentPos=currentTile.position;
@@ -26,11 +36,11 @@ public class Pawn extends Piece{
 
         for (int i: moveVector) {
             Tile destinationTile = (Tile)tiles.get(tempPos+i);
-            int destpos=destinationTile.position;
             if (destinationTile!=null&&destinationTile.piece==null&&
-                    ((this.color==Color.ANSI_WHITE&&
-                    destinationTile.position!=(currentPos-10))||this.color==Color.ANSI_BLACK&&destinationTile.position!=(currentPos+10))){
+                    ((this.color==Color.WHITE &&
+                    destinationTile.position!=(currentPos-10))||this.color==Color.BLACK &&destinationTile.position!=(currentPos+10))){
                     this.possibleMoves.add(new Move(currentTile,destinationTile,this,false));
+                    this.possibleMovesMap.put(destinationTile.position,destinationTile);
             }
         }
 
@@ -38,6 +48,7 @@ public class Pawn extends Piece{
             Tile destinationTile = (Tile)tiles.get(tempPos+i);
             if (destinationTile!=null&&destinationTile.piece!=null&&destinationTile.piece.getColor()!=this.color){
                 this.possibleMoves.add(new Move(currentTile,destinationTile,this,true));
+                this.possibleMovesMap.put(destinationTile.position,destinationTile);
             }
         }
 
@@ -46,10 +57,9 @@ public class Pawn extends Piece{
                 Tile destinationTile = (Tile)tiles.get(tempPos+i);
                 if (destinationTile!=null&&destinationTile.piece==null&&destinationTile.position!=(currentPos-10)){
                     this.possibleMoves.add(new Move(currentTile,destinationTile,this,false));
+                    this.possibleMovesMap.put(destinationTile.position,destinationTile);
                 }
             }
         }
-
-        return this.possibleMoves;
     }
 }

@@ -18,6 +18,19 @@ public class King extends Piece {
          }
 
     public ArrayList<Move> getPossibleMoves(){
+
+        this.setPossibleMoves();
+            return this.possibleMoves;
+    }
+
+    public Map<Integer, Tile> getPossibleMovesMap(){
+        this.setPossibleMoves();
+            return this.possibleMovesMap;
+    }
+
+
+    public void setPossibleMoves(){
+        this.possibleMoves.clear();
         Map tiles = BoardUtil.IntTiles;
         Tile currentTile = BoardUtil.pieceTileMap.get(this);
         int currentPos=currentTile.position;
@@ -35,14 +48,14 @@ public class King extends Piece {
                  *
                  */
                 this.possibleMoves.add(new Move(currentTile,destinationTile,this,false));
+                this.possibleMovesMap.put(destinationTile.position,destinationTile);
                 counter++;
                 destinationTile = (Tile)tiles.get(tempPos+(i*counter));
             }
             if (destinationTile!=null&&destinationTile.piece!=null&&destinationTile.piece.getColor()!=this.color){
                 this.possibleMoves.add(new Move(currentTile,destinationTile,this,true));
+                this.possibleMovesMap.put(destinationTile.position,destinationTile);
             }
         }
-
-        return this.possibleMoves;
     }
 }

@@ -3,16 +3,46 @@ package Util;
 import Board.Board;
 import Board.Tile;
 import Board.Tile;
+import Pieces.King;
 import Pieces.Piece;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 public class BoardUtil {
     public static Map<String, Tile> StringTiles = new HashMap<>();
     public static Map<Integer, Tile> IntTiles = new HashMap<>();
     public static Map<Piece,Tile> pieceTileMap = new HashMap<>();
+    public static Map<String,Tile> kingTileMap = new HashMap<>();
+    public static Stack<Piece> capturedWhitePiece = new Stack<>();
+    public static Stack<Piece> capturedBlackPiece = new Stack<>();
+    public static Stack<Move> executedMoves = new Stack<>();
+
+    public static Map<String,Tile> allWhiteMoves = new HashMap<>();
+
     Board board;
+
+
+    public static void addCapturedPiece(Piece p){
+        if (p.color==Color.WHITE){
+            capturedWhitePiece.push(p);
+        }
+        else {
+             capturedBlackPiece.push(p);
+        }
+    }
+
+    public static Piece getCapturedPiece(Color c){
+        if (c==Color.WHITE){
+            return capturedWhitePiece.pop();
+        }
+        else {
+            return capturedWhitePiece.pop();
+        }
+    }
+
 
     public BoardUtil(Board board){
         this.board=board;
@@ -20,16 +50,19 @@ public class BoardUtil {
         setMapping();
     }
 
-    public void printBoard(){
+    public void printToTerminal(){
         Tile tiles [][]=this.board.getTiles();
+        int row=8;
         for (int i =tiles.length-1; i>=0;i--){
-
+            System.out.print(row+  " :: ");
             for (int j =0; j<tiles[i].length;j++){
-                tiles[i][j].printToTerminal();
+              tiles[i][j].printToTerminal();
             }
-            System.out.println();
+            row--;
+            System.out.print("\n------------------------\n");
 
         }
+        System.out.println("     | A || B || C || D || E || F || G || H |\n");
     }
 
     public void setMapping(){

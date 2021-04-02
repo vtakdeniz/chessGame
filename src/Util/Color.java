@@ -3,14 +3,14 @@ package Util;
 public enum  Color {
 
      ANSI_RESET ,
-     ANSI_BLACK ,
+     BLACK,
      ANSI_RED ,
      ANSI_GREEN ,
      ANSI_YELLOW,
      ANSI_BLUE ,
      ANSI_PURPLE ,
      ANSI_CYAN ,
-     ANSI_WHITE ,
+     WHITE,
      RESET ;
 
      public String getColor(){
@@ -31,7 +31,7 @@ public enum  Color {
 
             case ANSI_RED:
                 return "RED";
-            case ANSI_BLACK:
+            case BLACK:
                 return "BLACK";
             case ANSI_GREEN:
                 return  "GREEN";
@@ -43,7 +43,7 @@ public enum  Color {
                 return "PURPLE";
             case ANSI_CYAN:
                 return "CYAN";
-            case ANSI_WHITE:
+            case WHITE:
                 return "WHITE";
 
             default:
@@ -63,7 +63,7 @@ public enum  Color {
                  return "\u001B[0m";
              case ANSI_RED:
                  return "\u001B[31m";
-             case ANSI_BLACK:
+             case BLACK:
                  return "\u001B[30m";
              case ANSI_GREEN:
                  return  "\u001B[32m";
@@ -75,7 +75,7 @@ public enum  Color {
                  return "\u001B[35m";
              case ANSI_CYAN:
                  return "\u001B[36m";
-             case ANSI_WHITE:
+             case WHITE:
                  return "\u001B[37m";
              case RESET:
                  return  "\033[0m";

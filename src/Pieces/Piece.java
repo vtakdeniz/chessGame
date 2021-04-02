@@ -1,12 +1,10 @@
 package Pieces;
-import Board.Board;
 import Util.Color;
 import Board.Tile;
 import Util.Move;
-import sun.jvm.hotspot.runtime.StaticBaseConstructor;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Piece {
@@ -16,13 +14,17 @@ public abstract class Piece {
     public Color color;
     public int moveVector[];
     public ArrayList<Move> possibleMoves;
+    public  Map<Integer, Tile> possibleMovesMap;
 
+    public abstract void setPossibleMoves();
     public abstract ArrayList<Move> getPossibleMoves();
+    public abstract Map<Integer, Tile> getPossibleMovesMap();
     Piece(Color color, String name, char code){
         this.color=color;
         this.name=name;
         this.code=code;
         possibleMoves=new ArrayList<>();
+        possibleMovesMap =new HashMap<>();
     }
 
 
@@ -41,6 +43,10 @@ public abstract class Piece {
 
     public Color getColor(){
         return this.color;
+    }
+
+    public String getColorName(){
+        return this.color.getColor();
     }
 
 }
