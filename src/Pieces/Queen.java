@@ -28,6 +28,7 @@ public class Queen extends Piece{
 
     public void setPossibleMoves(){
         this.possibleMoves.clear();
+        this.possibleMovesMap.clear();
         Map tiles = BoardUtil.IntTiles;
         Tile currentTile = BoardUtil.pieceTileMap.get(this);
         int currentPos=currentTile.position;

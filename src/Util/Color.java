@@ -18,6 +18,15 @@ public enum  Color {
          return getCol(this);
      }
 
+     public Color getReverse(){
+         if (this==Color.BLACK){
+             return Color.WHITE;
+         }
+         else {
+             return Color.BLACK;
+         }
+     }
+
     public String getAnsi(){
 
         return getAns(this);

@@ -2,6 +2,7 @@ package Pieces;
 import Util.Color;
 import Board.Tile;
 import Util.Move;
+import com.sun.org.apache.bcel.internal.generic.RET;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +29,13 @@ public abstract class Piece {
     }
 
 
+    public boolean getIsPlayed() {
+        return this.isPlayed;
+    }
+
+    public void setIsPlayed(boolean b) {
+         this.isPlayed=b;
+    }
 
     public boolean isMoved(){
         return  this.isPlayed;

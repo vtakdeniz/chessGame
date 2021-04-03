@@ -6,24 +6,62 @@ import Board.Tile;
 import Pieces.King;
 import Pieces.Piece;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public class BoardUtil {
     public static Map<String, Tile> StringTiles = new HashMap<>();
     public static Map<Integer, Tile> IntTiles = new HashMap<>();
     public static Map<Piece,Tile> pieceTileMap = new HashMap<>();
-    public static Map<String,Tile> kingTileMap = new HashMap<>();
+    public static Map<Color,Tile> kingTileMap = new HashMap<>();
     public static Stack<Piece> capturedWhitePiece = new Stack<>();
     public static Stack<Piece> capturedBlackPiece = new Stack<>();
     public static Stack<Move> executedMoves = new Stack<>();
 
-    public static Map<String,Tile> allWhiteMoves = new HashMap<>();
+    public static Map<Integer,Tile> allWhiteMoves = new HashMap<>();
+    public static Map<Integer,Tile> allBlackMoves = new HashMap<>();
 
     Board board;
 
+    public static Map<Integer,Tile> getMoves(Color c){
+        if (c==Color.BLACK){
+            setAllBlackMoves();
+            return allBlackMoves;
+        }
+        else{
+            setAllWhiteMoves();
+            return allWhiteMoves;
+        }
+    }
+
+    public static Map<Integer,Tile> getAllWhiteMoves(){
+        setAllWhiteMoves();
+        return allWhiteMoves;
+    }
+
+    public static Map<Integer,Tile> getAllBlackMoves(){
+        setAllBlackMoves();
+        return allBlackMoves;
+    }
+
+    public static void setAllWhiteMoves(){
+        allWhiteMoves.clear();
+        Piece pieces[] =pieceTileMap.keySet().toArray(new Piece[pieceTileMap.size()]);
+        for (int i =0;i<pieces.length;i++){
+            if (pieces[i].getColor()==Color.WHITE){
+                allWhiteMoves.putAll(pieces[i].getPossibleMovesMap());
+            }
+        }
+    }
+
+    public static void setAllBlackMoves(){
+        allBlackMoves.clear();
+        Piece pieces[] =pieceTileMap.keySet().toArray(new Piece[pieceTileMap.size()]);
+        for (int i =0;i<pieces.length;i++){
+            if (pieces[i].getColor()==Color.BLACK){
+                allBlackMoves.putAll(pieces[i].getPossibleMovesMap());
+            }
+        }
+    }
 
     public static void addCapturedPiece(Piece p){
         if (p.color==Color.WHITE){

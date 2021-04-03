@@ -3,9 +3,11 @@ package Util;
 import Board.Tile;
 import Board.Board;
 import Pieces.King;
+import Pieces.Pawn;
 import Pieces.Piece;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Move {
     public Tile startTile;
@@ -26,6 +28,34 @@ public class Move {
         this.isAttackMove=isAttackMove;
     }
 
+    public boolean isValid(){
+        return false;
+    }
+
+    public boolean isCheck(){
+        Piece p = this.startTile.piece;
+        this.startTile.piece=null;
+        Map<Integer,Tile> opponentMoves = BoardUtil.getMoves(p.color.getReverse());
+        if (opponentMoves.get(BoardUtil.kingTileMap.get(p.getColor()).position)!=null){
+           this.startTile.piece=p;
+           return true;
+        }
+        return false;
+    }
+
+    public void devExecuteMove(){
+        Piece p = this.startTile.piece;
+        this.destinationTile.piece=p;
+        this.startTile.piece=null;
+        BoardUtil.pieceTileMap.put(p,destinationTile);
+        if (p instanceof King){
+            BoardUtil.kingTileMap.put(p.getColor(),destinationTile);
+        }
+        if (p instanceof Pawn&&p.getIsPlayed()==false){
+            p.setIsPlayed(true);
+        }
+    }
+
     public boolean executeMove(){
         boolean isSuccesful=false;
         Piece p = this.startTile.piece;
@@ -38,7 +68,10 @@ public class Move {
             this.startTile.piece=null;
             BoardUtil.pieceTileMap.put(p,destinationTile);
             if (p instanceof King){
-                BoardUtil.kingTileMap.put(p.getColorName(),destinationTile);
+                BoardUtil.kingTileMap.put(p.getColor(),destinationTile);
+            }
+            if (p instanceof Pawn&&p.getIsPlayed()==false){
+                p.setIsPlayed(true);
             }
             isSuccesful=true;
             BoardUtil.executedMoves.push(this);

@@ -30,10 +30,10 @@ public class Tile {
         }
         else{
             if (piece.getColor()==Color.BLACK){
-                System.out.print(Color.ANSI_CYAN.getAnsi()+"|*"+piece.getCode()+"*|"+Color.RESET.getAnsi());
+                System.out.print(Color.ANSI_CYAN.getAnsi()+"| "+piece.getCode()+" |"+Color.RESET.getAnsi());
             }
             else{
-                System.out.print(Color.WHITE.getAnsi()+"|-"+piece.getCode()+"-|"+Color.RESET.getAnsi());
+                System.out.print(Color.WHITE.getAnsi()+"| "+piece.getCode()+" |"+Color.RESET.getAnsi());
             }
         }
 
