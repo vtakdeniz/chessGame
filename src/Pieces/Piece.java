@@ -17,8 +17,20 @@ public abstract class Piece {
     public ArrayList<Move> possibleMoves;
     public  Map<Integer, Tile> possibleMovesMap;
 
+    public  Map<Integer, Tile> validMovesMap;
+    public ArrayList<Move> validMoves;
+
+    //public abstract Map<Integer, Tile> getValidMovesMap();
+    public  Map<Integer, Tile> getValidMovesMap(){
+        return null;
+    }
+    public  ArrayList<Move> getValidMovesList(){
+        return null;
+    }
+
+
     public abstract void setPossibleMoves();
-    public abstract ArrayList<Move> getPossibleMoves();
+    public abstract ArrayList<Move> getPossibleMovesList();
     public abstract Map<Integer, Tile> getPossibleMovesMap();
     Piece(Color color, String name, char code){
         this.color=color;
@@ -26,8 +38,9 @@ public abstract class Piece {
         this.code=code;
         possibleMoves=new ArrayList<>();
         possibleMovesMap =new HashMap<>();
+        validMovesMap=new HashMap<>();
+        validMoves=new ArrayList<>();
     }
-
 
     public boolean getIsPlayed() {
         return this.isPlayed;

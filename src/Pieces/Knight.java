@@ -16,7 +16,7 @@ public class Knight extends Piece{
        super(color,"Knight",'n');
    }
 
-    public ArrayList<Move> getPossibleMoves(){
+    public ArrayList<Move> getPossibleMovesList(){
         this.setPossibleMoves();
         return this.possibleMoves;
     }

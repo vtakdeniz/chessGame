@@ -44,8 +44,13 @@ public class Move {
     }
 
     public void devExecuteMove(){
+        if(this.isAttackMove){
+            BoardUtil.addCapturedPiece(destinationTile.piece);
+            BoardUtil.pieceTileMap.remove(destinationTile.piece);
+        }
         Piece p = this.startTile.piece;
         this.destinationTile.piece=p;
+        System.out.println("DEBUG POSITION ::: "+this.destinationTile.position);
         this.startTile.piece=null;
         BoardUtil.pieceTileMap.put(p,destinationTile);
         if (p instanceof King){
@@ -57,7 +62,7 @@ public class Move {
     }
 
     public boolean executeMove(){
-        boolean isSuccesful=false;
+        boolean isSuccessful=false;
         Piece p = this.startTile.piece;
         if (p.getPossibleMovesMap().get(this.destinationTile.position)!=null){
             if(this.isAttackMove){
@@ -73,19 +78,19 @@ public class Move {
             if (p instanceof Pawn&&p.getIsPlayed()==false){
                 p.setIsPlayed(true);
             }
-            isSuccesful=true;
+            isSuccessful=true;
             BoardUtil.executedMoves.push(this);
         }
         else {
             System.out.println("Invalid Move. Piece cannot move to selected position.");
-            return isSuccesful;
+            return isSuccessful;
         }
         /************* WARNING *****************
-         *
+         **
          *    IMPLEMENT : IF CHECK METHOD HERE
          *
          */
-        return isSuccesful;
+        return isSuccessful;
     }
 
 

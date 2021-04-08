@@ -4,7 +4,6 @@ import Util.Color;
 import Util.Move;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class test {
     public static void main(String[] args) {
@@ -15,35 +14,33 @@ public class test {
 
         boardUtil.printToTerminal();
 
-        Move m = new Move(boardUtil.getTilebyString("d2"),boardUtil.getTilebyString("d4"));
-        m.executeMove();
-        Move m2 = new Move(boardUtil.getTilebyString("c1"),boardUtil.getTilebyString("h6"));
-        m2.executeMove();
+        Move m = new Move(boardUtil.getTilebyString("c1"),boardUtil.getTilebyString("f4"));
+        m.devExecuteMove();
+        Move m2 = new Move(boardUtil.getTilebyString("e8"),boardUtil.getTilebyString("g5"));
+        m2.devExecuteMove();
 
-        Move m3 = new Move(boardUtil.getTilebyString("h6"),boardUtil.getTilebyString("g7"));
-        m3.executeMove();
+        Move m3 = new Move(boardUtil.getTilebyString("d1"),boardUtil.getTilebyString("e3"));
+        m3.devExecuteMove();
 
-        Move m4 = new Move(boardUtil.getTilebyString("d1"),boardUtil.getTilebyString("d2"));
-        m4.executeMove();
-        Move m5 = new Move(boardUtil.getTilebyString("d2"),boardUtil.getTilebyString("d3"));
-        m5.executeMove();
-        Move m6 = new Move(boardUtil.getTilebyString("d3"),boardUtil.getTilebyString("e3"));
-        m6.executeMove();
 
         boardUtil.printToTerminal();
 
-        Move m7 = new Move(boardUtil.getTilebyString("e7"),boardUtil.getTilebyString("e6"));
-        m7.executeMove();
-        Move m8 = new Move(boardUtil.getTilebyString("e8"),boardUtil.getTilebyString("e7"));
-        m8.executeMove();
-        Move m11 = new Move(boardUtil.getTilebyString("e7"),boardUtil.getTilebyString("g5"));
-        m11.executeMove();
+        ArrayList<Move> moves=boardUtil.getTilebyString("f4").piece.getPossibleMovesList();
+        for (Move move:moves) {
+            System.out.println("get possible move start : "+move.startTile.position+" -- destination : "+ move.destinationTile.position+" "+move.startTile.piece.getCode());
+        }
 
-        Move m12 = new Move(boardUtil.getTilebyString("a2"),boardUtil.getTilebyString("a3"));
-        boardUtil.printToTerminal();
-        System.out.println(m12.isCheck());
+        System.out.println("\n ******************* ");
+
+        ArrayList<Move> moves2=boardUtil.getTilebyString("f4").piece.getValidMovesList();
+        for (Move move:moves2) {
+            System.out.println("get possible move start : "+move.startTile.position+" -- destination : "+ move.destinationTile.position+" "+move.startTile.piece.getCode());
+        }
 
 
-
+        ArrayList<Move> moves3=boardUtil.getTilebyString("g5").piece.getValidMovesList();
+        for (Move move:moves3) {
+            System.out.println("get possible move start : "+move.startTile.position+" -- destination : "+ move.destinationTile.position+" "+move.startTile.piece.getCode());
+        }
     }
 }

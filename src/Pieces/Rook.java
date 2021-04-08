@@ -17,7 +17,7 @@ public class Rook extends Piece {
         super(color,"Rook",'r');
     }
 
-    public ArrayList<Move> getPossibleMoves(){
+    public ArrayList<Move> getPossibleMovesList(){
         this.setPossibleMoves();
         return this.possibleMoves;
     }

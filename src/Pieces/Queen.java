@@ -16,7 +16,7 @@ public class Queen extends Piece{
         super(color,"Queen",'q');
     }
 
-    public ArrayList<Move> getPossibleMoves(){
+    public ArrayList<Move> getPossibleMovesList(){
         this.setPossibleMoves();
         return this.possibleMoves;
     }
