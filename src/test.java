@@ -43,6 +43,8 @@ public class test {
         boardUtil.printToTerminal();
         System.out.println(m12.isCheck());
 
+        System.out.println(boardUtil.getTilebyString("g5").piece.getCode());
+
 
 
     }
