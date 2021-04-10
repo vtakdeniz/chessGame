@@ -62,6 +62,8 @@ public class test {
 
         boardUtil.printToTerminal();
 
+        System.out.println(boardUtil.getTilebyString("g5").piece.getCode());
+
 
         ArrayList<Move> movesqueen=boardUtil.getTilebyString("g5").piece.getPossibleMovesList();
         for (Move move:movesqueen) {
