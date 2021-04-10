@@ -103,5 +103,56 @@ public class test {
             System.out.println("get valid move start : "+move.startTile.position+" -- destination : "+ move.destinationTile.position+" "+move.startTile.piece.getCode());
         }
 
+
+
+
+        Move m88 = new Move(boardUtil.getTilebyString("h4"),boardUtil.getTilebyString("g5"));
+        m88.executeMove();
+
+        Move m99 = new Move(boardUtil.getTilebyString("e1"),boardUtil.getTilebyString("f4"));
+        m99.devExecuteMove();
+
+        boardUtil.printToTerminal();
+
+
+        ArrayList<Move> moves454=boardUtil.getTilebyString("f4").piece.getPossibleMovesList();
+        for (Move move:moves454) {
+            System.out.println("get possible move start : "+move.startTile.position+" -- destination : "+ move.destinationTile.position+" "+move.startTile.piece.getCode());
+        }
+
+        System.out.println("\n ******************* ");
+
+        ArrayList<Move> moves55=boardUtil.getTilebyString("f4").piece.getValidMovesList();
+        for (Move move:moves55) {
+            System.out.println("get valid move start : "+move.startTile.position+" -- destination : "+ move.destinationTile.position+" "+move.startTile.piece.getCode());
+        }
+
+
+
+        Move m44 = new Move(boardUtil.getTilebyString("g5"),boardUtil.getTilebyString("e5"));
+        m44.executeMove();
+
+
+        boardUtil.printToTerminal();
+
+        ArrayList<Move> moves333=boardUtil.getTilebyString("e3").piece.getPossibleMovesList();
+        for (Move move:moves333) {
+            System.out.println("get possible move start : "+move.startTile.position+" -- destination : "+ move.destinationTile.position+" "+move.startTile.piece.getCode());
+        }
+
+        System.out.println("\n ******************* ");
+
+        ArrayList<Move> moves3334=boardUtil.getTilebyString("e3").piece.getValidMovesList();
+        for (Move move:moves3334) {
+            System.out.println("get valid move start : "+move.startTile.position+" -- destination : "+ move.destinationTile.position+" "+move.startTile.piece.getCode());
+        }
+
+
+        Move m234 = new Move(boardUtil.getTilebyString("e3"),boardUtil.getTilebyString("e4"));
+        m234.executeMove();
+        boardUtil.printToTerminal();
+
+
+
     }
 }

@@ -40,7 +40,7 @@ public abstract class Piece {
 
         this.setPossibleMoves();
         Piece destinationPiece;
-        Piece startTilePiece;
+        //Piece startTilePiece;
         for (Move move:this.possibleMoves) {
             if(move.isAttackMove){
                 destinationPiece=move.destinationTile.piece;
@@ -49,15 +49,15 @@ public abstract class Piece {
             else{
                 destinationPiece=null;
             }
-            startTilePiece = move.startTile.piece;
+            //startTilePiece = move.startTile.piece;
             move.startTile.piece=null;
-            move.destinationTile.piece=startTilePiece;
+            move.destinationTile.piece=this;
             Map<Integer,Tile> opponentMoves=BoardUtil.getMoves(this.color.getReverse());
             if (opponentMoves.get(BoardUtil.kingTileMap.get(this.color).position)==null){
                 validMovesMap.put(move.destinationTile.position,move.destinationTile);
                 validMoves.add(move);
             }
-            move.startTile.piece=startTilePiece;
+            move.startTile.piece=this;
             move.destinationTile.piece=destinationPiece;
 
             if(move.isAttackMove){BoardUtil.pieceTileMap.put(destinationPiece,move.destinationTile);}

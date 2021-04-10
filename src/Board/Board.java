@@ -1,5 +1,6 @@
 package Board;
 import Pieces.*;
+import Util.BoardUtil;
 import Util.Color;
 
 public class Board {
@@ -47,6 +48,8 @@ public class Board {
         tiles[0][3].piece= new King(Color.WHITE);
         kings[0]=(King)tiles[0][3].piece;
         kings[0].currentTile=tiles[0][3];
+        BoardUtil.kingTileMap.put(kings[0].color,kings[0].currentTile);
+
         tiles[0][4].piece= new Queen(Color.WHITE);
         tiles[0][5].piece= new Bishop(Color.WHITE);
         tiles[0][6].piece= new Knight(Color.WHITE);
@@ -58,10 +61,13 @@ public class Board {
         tiles[7][3].piece= new King(Color.BLACK);
         kings[1]=(King)tiles[7][3].piece;
         kings[1].currentTile=tiles[7][3];
+        BoardUtil.kingTileMap.put(kings[1].color,kings[1].currentTile);
+
         tiles[7][4].piece= new Queen(Color.BLACK);
         tiles[7][5].piece= new Bishop(Color.BLACK);
         tiles[7][6].piece= new Knight(Color.BLACK);
         tiles[7][7].piece= new Rook(Color.BLACK);
+
 
         for (int i =0; i<8;i++){
             tiles[1][i].piece=new Pawn(Color.WHITE);

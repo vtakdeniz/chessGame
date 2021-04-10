@@ -29,6 +29,37 @@ public class King extends Piece {
     }
 
 
+    public void setValidMoves(){
+        validMovesMap.clear();
+        validMoves.clear();
+
+        this.setPossibleMoves();
+        Piece destinationPiece;
+        for (Move move:this.possibleMoves) {
+            if(move.isAttackMove){
+                destinationPiece=move.destinationTile.piece;
+                BoardUtil.pieceTileMap.remove(destinationPiece);
+            }
+            else{
+                destinationPiece=null;
+            }
+            move.startTile.piece=null;
+            move.destinationTile.piece=this;
+            BoardUtil.kingTileMap.put(this.color,move.destinationTile);
+            Map<Integer,Tile> opponentMoves=BoardUtil.getMoves(this.color.getReverse());
+            if (opponentMoves.get(BoardUtil.kingTileMap.get(this.color).position)==null){
+                validMovesMap.put(move.destinationTile.position,move.destinationTile);
+                validMoves.add(move);
+            }
+            move.startTile.piece=this;
+            move.destinationTile.piece=destinationPiece;
+            BoardUtil.kingTileMap.put(this.color,move.destinationTile);
+
+            if(move.isAttackMove){BoardUtil.pieceTileMap.put(destinationPiece,move.destinationTile);}
+
+        }
+    }
+
     public void setPossibleMoves(){
         this.possibleMoves.clear();
         this.possibleMovesMap.clear();
