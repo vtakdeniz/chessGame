@@ -26,35 +26,42 @@ public class Bishop extends Piece{
         return this.possibleMovesMap;
     }
 
-    public void setValidMoves(){
+    /*public void setValidMoves(){
         validMovesMap.clear();
         this.setPossibleMoves();
+        Piece destinationPiece;
+
          for (Move move:this.possibleMoves) {
+            if(move.isAttackMove){
+                destinationPiece=move.destinationTile.piece;
+                BoardUtil.pieceTileMap.remove(destinationPiece);
+            }
+            else{
+                destinationPiece=null;
+            }
             Piece p = move.startTile.piece;
             move.startTile.piece=null;
             move.destinationTile.piece=p;
             Map<Integer,Tile> opponentMoves=BoardUtil.getMoves(this.color.getReverse());
             if (opponentMoves.get(BoardUtil.kingTileMap.get(this.color).position)==null){
-                System.out.println("king pos "+BoardUtil.kingTileMap.get(this.color).position);
                 validMovesMap.put(move.destinationTile.position,move.destinationTile);
                 validMoves.add(move);
-                move.startTile.piece=p;
-                move.destinationTile.piece=null;
             }
-            else{
-                move.startTile.piece=p;
-                move.destinationTile.piece=null;
-            }
+            move.startTile.piece=p;
+            move.destinationTile.piece=destinationPiece;
+
+            if(move.isAttackMove){BoardUtil.pieceTileMap.put(destinationPiece,move.destinationTile);}
+
          }
-    }
-    public ArrayList<Move> getValidMovesList(){
+    }*/
+   /* public ArrayList<Move> getValidMovesList(){
         setValidMoves();
         return this.validMoves;
     }
     public  Map<Integer, Tile> getValidMovesMap(){
         setValidMoves();
         return this.validMovesMap;
-    }
+    }*/
 
     public void setPossibleMoves(){
         this.possibleMoves.clear();

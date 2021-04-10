@@ -1,4 +1,5 @@
 package Pieces;
+import Util.BoardUtil;
 import Util.Color;
 import Board.Tile;
 import Util.Move;
@@ -20,14 +21,59 @@ public abstract class Piece {
     public  Map<Integer, Tile> validMovesMap;
     public ArrayList<Move> validMoves;
 
-    //public abstract Map<Integer, Tile> getValidMovesMap();
+
+
+
+    public ArrayList<Move> getValidMovesList(){
+        setValidMoves();
+        return this.validMoves;
+    }
     public  Map<Integer, Tile> getValidMovesMap(){
+        setValidMoves();
+        return this.validMovesMap;
+    }
+
+
+    public void setValidMoves(){
+        validMovesMap.clear();
+        validMoves.clear();
+
+        this.setPossibleMoves();
+        Piece destinationPiece;
+        Piece startTilePiece;
+        for (Move move:this.possibleMoves) {
+            if(move.isAttackMove){
+                destinationPiece=move.destinationTile.piece;
+                BoardUtil.pieceTileMap.remove(destinationPiece);
+            }
+            else{
+                destinationPiece=null;
+            }
+            startTilePiece = move.startTile.piece;
+            move.startTile.piece=null;
+            move.destinationTile.piece=startTilePiece;
+            Map<Integer,Tile> opponentMoves=BoardUtil.getMoves(this.color.getReverse());
+            if (opponentMoves.get(BoardUtil.kingTileMap.get(this.color).position)==null){
+                validMovesMap.put(move.destinationTile.position,move.destinationTile);
+                validMoves.add(move);
+            }
+            move.startTile.piece=startTilePiece;
+            move.destinationTile.piece=destinationPiece;
+
+            if(move.isAttackMove){BoardUtil.pieceTileMap.put(destinationPiece,move.destinationTile);}
+
+        }
+    }
+
+
+    //public abstract Map<Integer, Tile> getValidMovesMap();
+    /*public  Map<Integer, Tile> getValidMovesMap(){
         return null;
     }
     public  ArrayList<Move> getValidMovesList(){
         return null;
     }
-
+*/
 
     public abstract void setPossibleMoves();
     public abstract ArrayList<Move> getPossibleMovesList();
