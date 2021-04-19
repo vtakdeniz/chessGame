@@ -1,6 +1,6 @@
 package Util;
 
-public enum  Color {
+public enum GameColor {
 
      ANSI_RESET ,
      BLACK,
@@ -18,12 +18,12 @@ public enum  Color {
          return getCol(this);
      }
 
-     public Color getReverse(){
-         if (this==Color.BLACK){
-             return Color.WHITE;
+     public GameColor getReverse(){
+         if (this== GameColor.BLACK){
+             return GameColor.WHITE;
          }
          else {
-             return Color.BLACK;
+             return GameColor.BLACK;
          }
      }
 
@@ -34,7 +34,7 @@ public enum  Color {
 
 
 
-    public String getCol(Color c){
+    public String getCol(GameColor c){
 
         switch (c){
 
@@ -64,7 +64,7 @@ public enum  Color {
     }
 
 
-    public String getAns(Color c){
+    public String getAns(GameColor c){
 
          switch (c){
 

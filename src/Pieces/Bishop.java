@@ -1,7 +1,6 @@
 package Pieces;
-import Board.Board;
 import Util.BoardUtil;
-import Util.Color;
+import Util.GameColor;
 import Util.Move;
 import Board.Tile;
 
@@ -12,8 +11,8 @@ public class Bishop extends Piece{
 
     public int moveVector[]={ 11,9,-9,-11};
 
-    public Bishop(Color color){
-        super(color,"Bishop",'b');
+    public Bishop(GameColor gameColor){
+        super(gameColor,"Bishop",'b');
     }
 
     public ArrayList<Move> getPossibleMovesList(){
@@ -24,6 +23,15 @@ public class Bishop extends Piece{
     public Map<Integer, Tile> getPossibleMovesMap(){
         this.setPossibleMoves();
         return this.possibleMovesMap;
+    }
+
+    public String getIconPath(){
+        if (this.gameColor == GameColor.WHITE){
+            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/whiteBishop.png";
+        }
+        else{
+            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/blackBishop.png";
+        }
     }
 
     /*public void setValidMoves(){
@@ -81,7 +89,7 @@ public class Bishop extends Piece{
                 counter++;
                 destinationTile = (Tile)tiles.get(tempPos+(i*counter));
             }
-            if (destinationTile!=null&&destinationTile.piece!=null&&destinationTile.piece.getColor()!=this.color){
+            if (destinationTile!=null&&destinationTile.piece!=null&&destinationTile.piece.getColor()!=this.gameColor){
                 this.possibleMoves.add(new Move(currentTile,destinationTile,this,true));
                 this.possibleMovesMap.put(destinationTile.position,destinationTile);
             }

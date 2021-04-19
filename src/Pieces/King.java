@@ -1,8 +1,7 @@
 package Pieces;
-import Board.Board;
 import Board.Tile;
 import Util.BoardUtil;
-import Util.Color;
+import Util.GameColor;
 import Util.Move;
 
 import java.util.ArrayList;
@@ -13,8 +12,8 @@ public class King extends Piece {
 
         public Tile currentTile;
         public int moveVector[]={ 11,9,-9,-11,10,-10,1,-1 };
-        public King(Color color){
-            super(color,"King",'k');
+        public King(GameColor gameColor){
+            super(gameColor,"King",'k');
          }
 
     public ArrayList<Move> getPossibleMovesList(){
@@ -27,6 +26,16 @@ public class King extends Piece {
         this.setPossibleMoves();
             return this.possibleMovesMap;
     }
+
+    public String getIconPath(){
+        if (this.gameColor == GameColor.WHITE){
+            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/whiteKing.png";
+        }
+        else{
+            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/blackKing.png";
+        }
+    }
+
 
 
     public void setValidMoves(){
@@ -45,15 +54,15 @@ public class King extends Piece {
             }
             move.startTile.piece=null;
             move.destinationTile.piece=this;
-            BoardUtil.kingTileMap.put(this.color,move.destinationTile);
-            Map<Integer,Tile> opponentMoves=BoardUtil.getMoves(this.color.getReverse());
-            if (opponentMoves.get(BoardUtil.kingTileMap.get(this.color).position)==null){
+            BoardUtil.kingTileMap.put(this.gameColor,move.destinationTile);
+            Map<Integer,Tile> opponentMoves=BoardUtil.getMoves(this.gameColor.getReverse());
+            if (opponentMoves.get(BoardUtil.kingTileMap.get(this.gameColor).position)==null){
                 validMovesMap.put(move.destinationTile.position,move.destinationTile);
                 validMoves.add(move);
             }
             move.startTile.piece=this;
             move.destinationTile.piece=destinationPiece;
-            BoardUtil.kingTileMap.put(this.color,move.destinationTile);
+            BoardUtil.kingTileMap.put(this.gameColor,move.destinationTile);
 
             if(move.isAttackMove){BoardUtil.pieceTileMap.put(destinationPiece,move.destinationTile);}
 
@@ -75,7 +84,7 @@ public class King extends Piece {
                 this.possibleMovesMap.put(destinationTile.position,destinationTile);
                 destinationTile = (Tile)tiles.get(tempPos+(i));
             }
-            if (destinationTile!=null&&destinationTile.piece!=null&&destinationTile.piece.getColor()!=this.color){
+            if (destinationTile!=null&&destinationTile.piece!=null&&destinationTile.piece.getColor()!=this.gameColor){
                 this.possibleMoves.add(new Move(currentTile,destinationTile,this,true));
                 this.possibleMovesMap.put(destinationTile.position,destinationTile);
             }

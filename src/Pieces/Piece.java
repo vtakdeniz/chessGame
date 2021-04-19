@@ -1,9 +1,8 @@
 package Pieces;
 import Util.BoardUtil;
-import Util.Color;
+import Util.GameColor;
 import Board.Tile;
 import Util.Move;
-import com.sun.org.apache.bcel.internal.generic.RET;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +12,7 @@ public abstract class Piece {
     String name;
     char code;
     boolean isPlayed=false;
-    public Color color;
+    public GameColor gameColor;
     public int moveVector[];
     public ArrayList<Move> possibleMoves;
     public  Map<Integer, Tile> possibleMovesMap;
@@ -21,6 +20,7 @@ public abstract class Piece {
     public  Map<Integer, Tile> validMovesMap;
     public ArrayList<Move> validMoves;
 
+    public abstract String getIconPath();
 
 
 
@@ -52,8 +52,8 @@ public abstract class Piece {
             //startTilePiece = move.startTile.piece;
             move.startTile.piece=null;
             move.destinationTile.piece=this;
-            Map<Integer,Tile> opponentMoves=BoardUtil.getMoves(this.color.getReverse());
-            if (opponentMoves.get(BoardUtil.kingTileMap.get(this.color).position)==null){
+            Map<Integer,Tile> opponentMoves=BoardUtil.getMoves(this.gameColor.getReverse());
+            if (opponentMoves.get(BoardUtil.kingTileMap.get(this.gameColor).position)==null){
                 validMovesMap.put(move.destinationTile.position,move.destinationTile);
                 validMoves.add(move);
             }
@@ -63,6 +63,8 @@ public abstract class Piece {
             if(move.isAttackMove){BoardUtil.pieceTileMap.put(destinationPiece,move.destinationTile);}
 
         }
+
+        BoardUtil.setMoves(this.gameColor.getReverse());
     }
 
 
@@ -78,8 +80,8 @@ public abstract class Piece {
     public abstract void setPossibleMoves();
     public abstract ArrayList<Move> getPossibleMovesList();
     public abstract Map<Integer, Tile> getPossibleMovesMap();
-    Piece(Color color, String name, char code){
-        this.color=color;
+    Piece(GameColor gameColor, String name, char code){
+        this.gameColor = gameColor;
         this.name=name;
         this.code=code;
         possibleMoves=new ArrayList<>();
@@ -108,12 +110,12 @@ public abstract class Piece {
         return this.name;
     }
 
-    public Color getColor(){
-        return this.color;
+    public GameColor getColor(){
+        return this.gameColor;
     }
 
     public String getColorName(){
-        return this.color.getColor();
+        return this.gameColor.getColor();
     }
 
 }

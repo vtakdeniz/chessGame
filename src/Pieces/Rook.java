@@ -1,8 +1,7 @@
 package Pieces;
 
-import Board.Board;
 import Util.BoardUtil;
-import Util.Color;
+import Util.GameColor;
 import Util.Move;
 import Board.Tile;
 import java.util.ArrayList;
@@ -12,9 +11,9 @@ import java.util.Map;
 public class Rook extends Piece {
 
     public int moveVector[]={ 1,-1,10,-10};
-    public Rook(Color color)
+    public Rook(GameColor gameColor)
     {
-        super(color,"Rook",'r');
+        super(gameColor,"Rook",'r');
     }
 
     public ArrayList<Move> getPossibleMovesList(){
@@ -26,6 +25,16 @@ public class Rook extends Piece {
         this.setPossibleMoves();
         return this.possibleMovesMap;
     }
+
+    public String getIconPath(){
+        if (this.gameColor == GameColor.WHITE){
+            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/whiteRook.png";
+        }
+        else{
+            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/blackRook.png";
+        }
+    }
+
 
     public void setPossibleMoves(){
         this.possibleMoves.clear();
@@ -44,7 +53,7 @@ public class Rook extends Piece {
                 counter++;
                 destinationTile = (Tile)tiles.get(tempPos+(i*counter));
             }
-            if (destinationTile!=null&&destinationTile.piece!=null&&destinationTile.piece.getColor()!=this.color){
+            if (destinationTile!=null&&destinationTile.piece!=null&&destinationTile.piece.getColor()!=this.gameColor){
                 this.possibleMoves.add(new Move(currentTile,destinationTile,this,true));
                 this.possibleMovesMap.put(destinationTile.position,destinationTile);
             }

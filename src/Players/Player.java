@@ -1,6 +1,6 @@
 package Players;
-import Util.Color;
+import Util.GameColor;
 
 public class Player {
-    Color color;
+    GameColor gameColor;
 }

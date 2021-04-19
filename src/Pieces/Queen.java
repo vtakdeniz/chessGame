@@ -1,8 +1,7 @@
 package Pieces;
-import Board.Board;
 import Board.Tile;
 import Util.BoardUtil;
-import Util.Color;
+import Util.GameColor;
 import Util.Move;
 
 import java.util.ArrayList;
@@ -12,8 +11,8 @@ import java.util.Map;
 public class Queen extends Piece{
 
     public int moveVector[]={ 1,-1,10 ,-10,11 ,9,-9,- 11};
-    public Queen(Color color){
-        super(color,"Queen",'q');
+    public Queen(GameColor gameColor){
+        super(gameColor,"Queen",'q');
     }
 
     public ArrayList<Move> getPossibleMovesList(){
@@ -25,6 +24,16 @@ public class Queen extends Piece{
         this.setPossibleMoves();
         return this.possibleMovesMap;
     }
+
+    public String getIconPath(){
+        if (this.gameColor == GameColor.WHITE){
+            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/whiteQueen.png";
+        }
+        else{
+            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/blackQueen.png";
+        }
+    }
+
 
     public void setPossibleMoves(){
         this.possibleMoves.clear();
@@ -44,7 +53,7 @@ public class Queen extends Piece{
                 counter++;
                 destinationTile = (Tile)tiles.get(tempPos+(i*counter));
             }
-            if (destinationTile!=null&&destinationTile.piece!=null&&destinationTile.piece.getColor()!=this.color){
+            if (destinationTile!=null&&destinationTile.piece!=null&&destinationTile.piece.getColor()!=this.gameColor){
                 this.possibleMoves.add(new Move(currentTile,destinationTile,this,true));
                 this.possibleMovesMap.put(destinationTile.position,destinationTile);
             }

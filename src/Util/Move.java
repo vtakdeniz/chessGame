@@ -1,12 +1,10 @@
 package Util;
 
 import Board.Tile;
-import Board.Board;
 import Pieces.King;
 import Pieces.Pawn;
 import Pieces.Piece;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class Move {
@@ -35,7 +33,7 @@ public class Move {
     public boolean isCheck(){
         Piece p = this.startTile.piece;
         this.startTile.piece=null;
-        Map<Integer,Tile> opponentMoves = BoardUtil.getMoves(p.color.getReverse());
+        Map<Integer,Tile> opponentMoves = BoardUtil.getMoves(p.gameColor.getReverse());
         if (opponentMoves.get(BoardUtil.kingTileMap.get(p.getColor()).position)!=null){
            this.startTile.piece=p;
            return true;

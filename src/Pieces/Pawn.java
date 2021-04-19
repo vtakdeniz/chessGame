@@ -1,7 +1,7 @@
 package Pieces;
 import Board.Tile;
 import Util.BoardUtil;
-import Util.Color;
+import Util.GameColor;
 import Util.Move;
 
 import java.util.ArrayList;
@@ -13,8 +13,8 @@ public class Pawn extends Piece{
     public int moveVector[]={ 10 , -10};
     public int attackVector[]={ 11 ,9,-9,- 11};
     public int enPassantVector[]={20,-20};
-    public Pawn(Color color){
-        super(color,"Pawn",'p');
+    public Pawn(GameColor gameColor){
+        super(gameColor,"Pawn",'p');
     }
 
     public ArrayList<Move> getPossibleMovesList(){
@@ -27,6 +27,16 @@ public class Pawn extends Piece{
         return this.possibleMovesMap;
     }
 
+    public String getIconPath(){
+        if (this.gameColor == GameColor.WHITE){
+            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/whitePawn.png";
+        }
+        else{
+            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/blackPawn.png";
+        }
+    }
+
+
     public void setPossibleMoves(){
         this.possibleMoves.clear();
         this.possibleMovesMap.clear();
@@ -38,8 +48,8 @@ public class Pawn extends Piece{
         for (int i: moveVector) {
             Tile destinationTile = (Tile)tiles.get(tempPos+i);
             if (destinationTile!=null&&destinationTile.piece==null&&
-                    ((this.color==Color.WHITE &&
-                    destinationTile.position!=(currentPos-10))||this.color==Color.BLACK &&destinationTile.position!=(currentPos+10))){
+                    ((this.gameColor == GameColor.WHITE &&
+                    destinationTile.position!=(currentPos-10))||this.gameColor == GameColor.BLACK &&destinationTile.position!=(currentPos+10))){
                     this.possibleMoves.add(new Move(currentTile,destinationTile,this,false));
                     this.possibleMovesMap.put(destinationTile.position,destinationTile);
             }
@@ -47,7 +57,7 @@ public class Pawn extends Piece{
 
         for (int i: attackVector) {
             Tile destinationTile = (Tile)tiles.get(tempPos+i);
-            if (destinationTile!=null&&destinationTile.piece!=null&&destinationTile.piece.getColor()!=this.color){
+            if (destinationTile!=null&&destinationTile.piece!=null&&destinationTile.piece.getColor()!=this.gameColor){
                 this.possibleMoves.add(new Move(currentTile,destinationTile,this,true));
                 this.possibleMovesMap.put(destinationTile.position,destinationTile);
             }

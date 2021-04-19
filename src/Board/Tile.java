@@ -1,39 +1,40 @@
 package Board;
 
 import Pieces.Piece;
-import Util.Color;
+import Util.GameColor;
 
 
 public class Tile {
 
-    public final int xcoordinate=0;
-    public final int ycoordinate=0;
-    protected Color color;
+    protected GameColor gameColor;
     public final int position;
     public Piece piece;
 
-
-    public Tile(Color color, int position) {
-        this.color = color;
+    public Tile(GameColor gameColor, int position) {
+        this.gameColor = gameColor;
         this.position = position;
+    }
+
+    public boolean isOccupied(){
+        return this.piece!=null;
     }
 
     public void printToTerminal(){
 
         if (piece == null){
-            if (this.color==Color.BLACK){
-                System.out.print(Color.ANSI_CYAN.getAnsi()+"|***|"+Color.RESET.getAnsi());
+            if (this.gameColor == GameColor.BLACK){
+                System.out.print(GameColor.ANSI_CYAN.getAnsi()+"|***|"+ GameColor.RESET.getAnsi());
             }
             else{
-                System.out.print(Color.WHITE.getAnsi()+"|---|"+Color.RESET.getAnsi());
+                System.out.print(GameColor.WHITE.getAnsi()+"|---|"+ GameColor.RESET.getAnsi());
             }
         }
         else{
-            if (piece.getColor()==Color.BLACK){
-                System.out.print(Color.ANSI_CYAN.getAnsi()+"| "+piece.getCode()+" |"+Color.RESET.getAnsi());
+            if (piece.getColor()== GameColor.BLACK){
+                System.out.print(GameColor.ANSI_CYAN.getAnsi()+"| "+piece.getCode()+" |"+ GameColor.RESET.getAnsi());
             }
             else{
-                System.out.print(Color.WHITE.getAnsi()+"| "+piece.getCode()+" |"+Color.RESET.getAnsi());
+                System.out.print(GameColor.WHITE.getAnsi()+"| "+piece.getCode()+" |"+ GameColor.RESET.getAnsi());
             }
         }
 
