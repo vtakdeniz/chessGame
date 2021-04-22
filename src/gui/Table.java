@@ -106,6 +106,7 @@ public class Table {
 
     private class TilePanel extends JPanel{
         private final int tileId;
+        boolean pressed;
 
         TilePanel(final BoardPanel boardPanel,final int tileId){
             super(new GridBagLayout());
@@ -114,55 +115,54 @@ public class Table {
             setTileColor();
             setTileIcon(chessBoard);
 
+
             addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    destinationTile=null;
-                   if(selectedTile==null){
-                       selectedTile= chessBoard.getTileByInt(tileId);
-                       selectedPiece=selectedTile.piece;
-                       if (selectedPiece==null){
-                           selectedTile=null;
-                       }
-                       System.out.println(tileId);
-                   }
-                   else{
 
-                       destinationTile=chessBoard.getTileByInt(tileId);
-                       if (destinationTile!=selectedTile){
-                           //System.out.println(destinationTile.piece.getCode());
-                           Move move = new Move(selectedTile,destinationTile);
-                           System.out.println(tileId);
-                           boolean isSuccessful=move.executeMove();
-                           selectedTile=null;
-                           destinationTile=null;
-                           selectedPiece=null;
-                           System.out.println(chessBoard.getTileByInt(16).isOccupied());
-                           if(isSuccessful) System.out.println("execution successful");
-                       }
-                       else
-                       {
-                           destinationTile=null;
-                       }
-
-                      }
-
-                   SwingUtilities.invokeLater(new Runnable() {
-                       @Override
-                       public void run() {
-                           boardPanel.drawBoard(chessBoard);
-                       }
-                   });
                 }
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-
+                     pressed = true;
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
+                    if (pressed) {
+                        destinationTile=null;
+                        if(selectedTile==null){
+                            selectedTile= chessBoard.getTileByInt(tileId);
+                            selectedPiece=selectedTile.piece;
+                            if (selectedPiece==null){
+                                selectedTile=null;
+                            }
+                        }
+                        else{
 
+                            destinationTile=chessBoard.getTileByInt(tileId);
+                            if (destinationTile!=selectedTile){
+                                //System.out.println(destinationTile.piece.getCode());
+                                Move move = new Move(selectedTile,destinationTile);
+                                boolean isSuccessful=move.executeMove();
+                                selectedTile=null;
+                                destinationTile=null;
+                                selectedPiece=null;
+                            }
+                            else
+                            {
+                                destinationTile=null;
+                            }
+
+                        }
+
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                boardPanel.drawBoard(chessBoard);
+                            }
+                        });
+                    }
                 }
 
                 @Override
@@ -172,7 +172,7 @@ public class Table {
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-
+                    pressed = false;
                 }
             });
             validate();

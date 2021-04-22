@@ -29,10 +29,10 @@ public class King extends Piece {
 
     public String getIconPath(){
         if (this.gameColor == GameColor.WHITE){
-            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/whiteKing.png";
+            return "out/production/chessGameJava/gui/icons/whiteKing.png";
         }
         else{
-            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/blackKing.png";
+            return "out/production/chessGameJava/gui/icons/blackKing.png";
         }
     }
 

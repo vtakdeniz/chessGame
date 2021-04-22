@@ -26,10 +26,10 @@ public class Knight extends Piece{
     }
     public String getIconPath(){
         if (this.gameColor == GameColor.WHITE){
-            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/whiteKnight.png";
+            return "out/production/chessGameJava/gui/icons/whiteKnight.png";
         }
         else{
-            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/blackKnight.png";
+            return "out/production/chessGameJava/gui/icons/blackKnight.png";
         }
     }
 

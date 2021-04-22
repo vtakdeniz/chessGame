@@ -27,10 +27,10 @@ public class Bishop extends Piece{
 
     public String getIconPath(){
         if (this.gameColor == GameColor.WHITE){
-            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/whiteBishop.png";
+            return "out/production/chessGameJava/gui/icons/whiteBishop.png";
         }
         else{
-            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/blackBishop.png";
+            return "out/production/chessGameJava/gui/icons/blackBishop.png";
         }
     }
 

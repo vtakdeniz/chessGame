@@ -27,10 +27,10 @@ public class Queen extends Piece{
 
     public String getIconPath(){
         if (this.gameColor == GameColor.WHITE){
-            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/whiteQueen.png";
+            return "out/production/chessGameJava/gui/icons/whiteQueen.png";
         }
         else{
-            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/blackQueen.png";
+            return "out/production/chessGameJava/gui/icons/blackQueen.png";
         }
     }
 

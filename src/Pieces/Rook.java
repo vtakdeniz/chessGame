@@ -28,10 +28,10 @@ public class Rook extends Piece {
 
     public String getIconPath(){
         if (this.gameColor == GameColor.WHITE){
-            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/whiteRook.png";
+            return "out/production/chessGameJava/gui/icons/whiteRook.png";
         }
         else{
-            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/blackRook.png";
+            return "out/production/chessGameJava/gui/icons/blackRook.png";
         }
     }
 

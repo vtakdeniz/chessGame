@@ -29,10 +29,10 @@ public class Pawn extends Piece{
 
     public String getIconPath(){
         if (this.gameColor == GameColor.WHITE){
-            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/whitePawn.png";
+            return "out/production/chessGameJava/gui/icons/whitePawn.png";
         }
         else{
-            return "/Users/veliakdeniz/Desktop/chessGameJava/src/gui/icons/blackPawn.png";
+            return "out/production/chessGameJava/gui/icons/blackPawn.png";
         }
     }
 
