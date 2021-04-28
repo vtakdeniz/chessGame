@@ -4,7 +4,7 @@ import Pieces.Piece;
 import Util.GameColor;
 
 
-public class Tile {
+public class Tile implements java.io.Serializable{
 
     protected GameColor gameColor;
     public final int position;

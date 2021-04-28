@@ -7,7 +7,7 @@ import Pieces.Piece;
 
 import java.util.Map;
 
-public class Move {
+public class Move implements java.io.Serializable{
     public Tile startTile;
     public Tile destinationTile;
     public boolean isAttackMove;

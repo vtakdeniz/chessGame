@@ -14,19 +14,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import Board.Tile;
+import Networking.Client;
 import Pieces.*;
 import Util.*;
 
 
 public class Table {
     private final JFrame gameFrame;
-    private final BoardPanel boardPanel;
+    private static  BoardPanel boardPanel;
     private final static Dimension OUTFRAMEDIMENSION = new Dimension(900,900);
     private final static Dimension BOARD_PANEL_DIMENSION = new Dimension(700,650);
     private final static Dimension TILE_DIMENSION = new Dimension(30,30);
     private Color lightTileColor = Color.decode("#FFFFFF");
     private Color darkTileColor = Color.decode("#606000");
-    private final Board chessBoard;
+    private static  Board chessBoard;
 
     private Tile selectedTile;
     private Tile startTile;
@@ -45,20 +46,24 @@ public class Table {
       this.boardPanel=new BoardPanel();
       this.gameFrame.add(this.boardPanel,BorderLayout.CENTER);
       this.gameFrame.setVisible(true);
+        Client.Start("127.0.0.1",2000);
+
+    }
+
+    public static void executeRivalMove(Move m){
+        Move newMove= new Move(BoardUtil.IntTiles.get(m.startTile.position),BoardUtil.IntTiles.get(m.destinationTile.position));
+        newMove.executeMove();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                boardPanel.drawBoard(chessBoard);
+            }
+        });
     }
 
     private void setMenuBar(JMenuBar tableMenuBar){
-        final JMenu fileMenu = new JMenu("File");
-        final JMenuItem openPGN = new JMenuItem("Load PGN");
-        openPGN.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        System.out.println("open pgn");
-                    }
-                }
-        );
-        fileMenu.add(openPGN);
+        final JMenu menu = new JMenu("Menu");
+
 
         final JMenuItem exitMenuItem = new JMenuItem("Exit");
         exitMenuItem.addActionListener(new ActionListener() {
@@ -68,9 +73,9 @@ public class Table {
             }
         });
 
-        fileMenu.add(exitMenuItem);
+        menu.add(exitMenuItem);
 
-        tableMenuBar.add(fileMenu);
+        tableMenuBar.add(menu);
     }
 
 
@@ -103,6 +108,7 @@ public class Table {
             repaint();
         }
     }
+
 
     private class TilePanel extends JPanel{
         private final int tileId;
@@ -145,6 +151,7 @@ public class Table {
                                 //System.out.println(destinationTile.piece.getCode());
                                 Move move = new Move(selectedTile,destinationTile);
                                 boolean isSuccessful=move.executeMove();
+                                if(isSuccessful){Client.Send(move);}
                                 selectedTile=null;
                                 destinationTile=null;
                                 selectedPiece=null;
@@ -203,6 +210,16 @@ public class Table {
             setBackground(isLight ? lightTileColor : darkTileColor);
         }
 
+    }
+
+
+    public static void main(String args[]) {
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Table(new Board());
+            }
+        });
     }
 
 }

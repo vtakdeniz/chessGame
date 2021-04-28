@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Piece {
+public abstract class Piece implements java.io.Serializable{
     String name;
     char code;
     boolean isPlayed=false;
