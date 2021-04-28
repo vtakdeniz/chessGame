@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import Board.Tile;
 import Networking.Client;
+import Networking.GameStatus;
 import Pieces.*;
+import Players.Player;
 import Util.*;
 
 
@@ -33,7 +35,8 @@ public class Table {
     private Tile startTile;
     private Tile destinationTile;
     private Piece selectedPiece;
-
+    public static Player player;
+    public static GameColor currentPlayer;
 
     public Table(Board b){
       this.gameFrame= new JFrame("Chess Game");
@@ -46,13 +49,27 @@ public class Table {
       this.boardPanel=new BoardPanel();
       this.gameFrame.add(this.boardPanel,BorderLayout.CENTER);
       this.gameFrame.setVisible(true);
-        Client.Start("127.0.0.1",2000);
+      currentPlayer=GameColor.WHITE;
+      //Client.Start("127.0.0.1",2000);
+    }
 
+
+    public static void togglePlayer(){
+        currentPlayer=currentPlayer.getReverse();
+    }
+
+    public static void setPlayer(Player p){
+        player=p;
     }
 
     public static void executeRivalMove(Move m){
         Move newMove= new Move(BoardUtil.IntTiles.get(m.startTile.position),BoardUtil.IntTiles.get(m.destinationTile.position));
-        newMove.executeMove();
+        boolean isSuccesfull;
+
+        isSuccesfull=newMove.executeMove();
+        if(isSuccesfull){
+            togglePlayer();
+        }
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -150,8 +167,17 @@ public class Table {
                             if (destinationTile!=selectedTile){
                                 //System.out.println(destinationTile.piece.getCode());
                                 Move move = new Move(selectedTile,destinationTile);
-                                boolean isSuccessful=move.executeMove();
-                                if(isSuccessful){Client.Send(move);}
+
+                                boolean isSuccessful=false;
+                                if(currentPlayer== move.startTile.piece.getColor()){
+                                     isSuccessful=move.executeMove();
+                                }
+                                if(isSuccessful){
+                                    GameStatus s = new GameStatus(GameStatus.Type.Move);
+                                    s.content=move;
+                                    Client.Send(s);
+                                    togglePlayer();
+                                }
                                 selectedTile=null;
                                 destinationTile=null;
                                 selectedPiece=null;

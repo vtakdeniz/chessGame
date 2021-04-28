@@ -1,12 +1,14 @@
 package Networking;
 
-public class Message implements java.io.Serializable {
-    public static enum Message_Type {None, Name, Disconnect, RivalConnected, Text, Selected, Bitis, Start,}
 
-    public Message_Type type;
+public class GameStatus implements java.io.Serializable {
+
+    public static enum Type {Status, User, UserID, Disconnect, adversaryOnline, Message, Move, SpecialMove, Undo, Board}
+
+    public Type type;
     public Object content;
 
-    public Message(Message_Type t) {
+    public GameStatus(Type t) {
         this.type = t;
     }
 
