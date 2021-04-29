@@ -2,6 +2,12 @@ package Board;
 import Pieces.*;
 import Util.BoardUtil;
 import Util.GameColor;
+import Util.Move;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Board {
 
@@ -19,6 +25,28 @@ public class Board {
 
     public int getTilePosition(Tile tile){
         return BoardUtil.TileInt.get(tile);
+    }
+
+    public boolean isMoveCheck(Move m){
+        boolean isCheck=false;
+        Piece p = m.destinationTile.piece;
+        p.setPossibleMoves();
+        Map allMoves = p.possibleMovesMap;
+        System.out.println("oynayan color "+p.getColor().getColor()+"   şahı poz :   "+BoardUtil.kingTileMap.get(p.getColor().getReverse()).position);
+        System.out.println("oynayan = "+p.getColor().getColor()+" ::  rakibi = "+p.getColor().getReverse().getColor());
+        Iterator<Tile> itr = allMoves.values().iterator();
+        while (itr.hasNext()) {
+            System.out.println(itr.next().position);
+        }
+
+        Tile kingPos = (Tile)(allMoves.get(BoardUtil.kingTileMap.get(p.getColor().getReverse()).position));
+
+        if (kingPos!=null){
+            isCheck=true;
+            System.out.println("This is ischeck method in board. This is check");
+        }
+
+        return isCheck;
     }
 
     public void printToTerminal(){

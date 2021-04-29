@@ -53,6 +53,7 @@ public class Queen extends Piece{
                 counter++;
                 destinationTile = (Tile)tiles.get(tempPos+(i*counter));
             }
+
             if (destinationTile!=null&&destinationTile.piece!=null&&destinationTile.piece.getColor()!=this.gameColor){
                 this.possibleMoves.add(new Move(currentTile,destinationTile,this,true));
                 this.possibleMovesMap.put(destinationTile.position,destinationTile);

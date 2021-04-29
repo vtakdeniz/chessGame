@@ -25,10 +25,10 @@ class Listen extends Thread {
                         Table.executeRivalMove(m);
                         break;
                     case User:
-                        Player p = (Player)(received.content);
-                        Table.setPlayer(p);
                         Board b = new Board();
                         Table t = new Table(b);
+                        Player p = (Player)(received.content);
+                        Table.setPlayer(p);
 
                         break;
                     case Disconnect:

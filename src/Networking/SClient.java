@@ -61,10 +61,17 @@ public class SClient {
                 try {
                     Object received = TheClient.sInput.readObject();
                     Server.Send(TheClient.rival,received);
+
                 } catch (IOException e) {
+                    TheClient.pairThread.stop();
+                    Server.Clients.remove(TheClient);
                     e.printStackTrace();
+                    break;
                 } catch (ClassNotFoundException e) {
+                    TheClient.pairThread.stop();
+                    Server.Clients.remove(TheClient);
                     e.printStackTrace();
+                    break;
                 }
                /* try {
                     //mesajı bekleyen kod satırı
@@ -136,8 +143,14 @@ public class SClient {
                                     Player p1 = new Player();
                                     Player p2 = new Player();
                                     Random r = new Random();
-                                    if (r.nextInt(1)==1){
+                                    int luck=r.nextInt(3);
+                                    System.out.println(luck);
+                                    if (luck==1){
                                         p1.playerColor= GameColor.WHITE;
+                                        p2.playerColor=p1.playerColor.getReverse();
+                                    }
+                                    else{
+                                        p1.playerColor= GameColor.BLACK;
                                         p2.playerColor=p1.playerColor.getReverse();
                                     }
 

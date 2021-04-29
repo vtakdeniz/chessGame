@@ -39,6 +39,7 @@ public class Table {
     public static GameColor currentPlayer;
 
     public Table(Board b){
+        System.out.println("Table initiated");
       this.gameFrame= new JFrame("Chess Game");
       this.gameFrame.setLayout(new BorderLayout());
       final JMenuBar tableMenuBar = new JMenuBar();
@@ -60,6 +61,7 @@ public class Table {
 
     public static void setPlayer(Player p){
         player=p;
+        System.out.println("Player color is "+player.playerColor.name());
     }
 
     public static void executeRivalMove(Move m){
@@ -69,7 +71,10 @@ public class Table {
         isSuccesfull=newMove.executeMove();
         if(isSuccesfull){
             togglePlayer();
+            chessBoard.isMoveCheck(newMove);
         }
+
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -165,11 +170,10 @@ public class Table {
 
                             destinationTile=chessBoard.getTileByInt(tileId);
                             if (destinationTile!=selectedTile){
-                                //System.out.println(destinationTile.piece.getCode());
                                 Move move = new Move(selectedTile,destinationTile);
 
                                 boolean isSuccessful=false;
-                                if(currentPlayer== move.startTile.piece.getColor()){
+                                if(currentPlayer== move.startTile.piece.getColor()&&currentPlayer==player.playerColor){
                                      isSuccessful=move.executeMove();
                                 }
                                 if(isSuccessful){
@@ -177,6 +181,15 @@ public class Table {
                                     s.content=move;
                                     Client.Send(s);
                                     togglePlayer();
+
+                                    if(chessBoard.isMoveCheck(move)){
+
+                                        System.out.println(player.playerColor+"   checked other player ");
+                                    }
+                                    else{
+                                        System.out.println(player.playerColor+"  couldnt check ");
+                                    }
+
                                 }
                                 selectedTile=null;
                                 destinationTile=null;
