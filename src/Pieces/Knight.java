@@ -38,7 +38,7 @@ public class Knight extends Piece{
     public void setPossibleMoves(){
         this.possibleMoves.clear();
         this.possibleMovesMap.clear();
-        Map tiles = BoardUtil.IntTiles;
+        Map tiles = BoardUtil.IntTilesMap;
         Tile currentTile = BoardUtil.pieceTileMap.get(this);
         int currentPos=currentTile.position;
         int tempPos=currentPos;

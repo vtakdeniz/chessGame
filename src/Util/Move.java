@@ -15,7 +15,7 @@ public class Move implements java.io.Serializable{
     public Move(Tile start, Tile dest){
         this.startTile=start;
         this.destinationTile=dest;
-        if (destinationTile.piece!=null&&destinationTile.piece.getColor()!=start.piece.getColor()){
+        if (destinationTile.piece!=null&&startTile.piece!=null&&destinationTile.piece.getColor()!=startTile.piece.getColor()){
             this.isAttackMove=true;
         }
     }

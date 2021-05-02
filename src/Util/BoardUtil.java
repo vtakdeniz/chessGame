@@ -7,26 +7,63 @@ import Pieces.Piece;
 import java.util.*;
 
 public class BoardUtil {
-    public static Map<String, Tile> StringTiles = new HashMap<>();
-    public static Map<Integer, Tile> IntTiles = new HashMap<>();
-    public static Map<Tile, Integer> TileInt = new HashMap<>();
+    public static Map<String, Tile> StringTilesMap = new HashMap<>();
+    public static Map<Integer, Tile> IntTilesMap = new HashMap<>();
+    public static Map<Tile, Integer> TileIntMap = new HashMap<>();
     public static Map<Piece,Tile> pieceTileMap = new HashMap<>();
     public static Map<GameColor,Tile> kingTileMap = new HashMap<>();
     public static Stack<Piece> capturedWhitePiece = new Stack<>();
     public static Stack<Piece> capturedBlackPiece = new Stack<>();
     public static Stack<Move> executedMoves = new Stack<>();
 
-    public static Map<Integer,Tile> allWhiteMoves = new HashMap<>();
-    public static Map<Integer,Tile> allBlackMoves = new HashMap<>();
+    public static Map<Integer,Tile> allWhiteMovesMap = new HashMap<>();
+    public static Map<Integer,Tile> allBlackMovesMap = new HashMap<>();
+
+    public static Map<Integer,Tile> allWhiteValidMoves = new HashMap<>();
+    public static Map<Integer,Tile> allBlackValidMoves = new HashMap<>();
+
+
+    public static Map<Integer,Tile> getValidMoves(GameColor c){
+        if (c== GameColor.BLACK){
+            setAllValidBlackMovesMap();
+            return allBlackValidMoves;
+        }
+        else{
+            setAllValidWhiteMovesMap();
+            return allWhiteValidMoves;
+        }
+
+    }
+
+    public static void setAllValidWhiteMovesMap(){
+        allWhiteValidMoves.clear();
+        Piece pieces[] =pieceTileMap.keySet().toArray(new Piece[pieceTileMap.size()]);
+        for (int i =0;i<pieces.length;i++){
+            if (pieces[i].getColor()== GameColor.WHITE){
+                allWhiteValidMoves.putAll(pieces[i].getValidMovesMap());
+            }
+        }
+    }
+
+
+       public static void setAllValidBlackMovesMap(){
+           allBlackValidMoves.clear();
+           Piece pieces[] =pieceTileMap.keySet().toArray(new Piece[pieceTileMap.size()]);
+           for (int i =0;i<pieces.length;i++){
+               if (pieces[i].getColor()== GameColor.BLACK){
+                   allBlackValidMoves.putAll(pieces[i].getValidMovesMap());
+               }
+           }
+       }
 
     public static Map<Integer,Tile> getMoves(GameColor c){
         if (c== GameColor.BLACK){
             setAllBlackMoves();
-            return allBlackMoves;
+            return allBlackMovesMap;
         }
         else{
             setAllWhiteMoves();
-            return allWhiteMoves;
+            return allWhiteMovesMap;
         }
     }
 
@@ -40,32 +77,32 @@ public class BoardUtil {
         }
     }
 
-    public static Map<Integer,Tile> getAllWhiteMoves(){
+    public static Map<Integer,Tile> getAllWhiteMovesMap(){
         setAllWhiteMoves();
-        return allWhiteMoves;
+        return allWhiteMovesMap;
     }
 
-    public static Map<Integer,Tile> getAllBlackMoves(){
+    public static Map<Integer,Tile> getAllBlackMovesMap(){
         setAllBlackMoves();
-        return allBlackMoves;
+        return allBlackMovesMap;
     }
 
     public static void setAllWhiteMoves(){
-        allWhiteMoves.clear();
+        allWhiteMovesMap.clear();
         Piece pieces[] =pieceTileMap.keySet().toArray(new Piece[pieceTileMap.size()]);
         for (int i =0;i<pieces.length;i++){
             if (pieces[i].getColor()== GameColor.WHITE){
-                allWhiteMoves.putAll(pieces[i].getPossibleMovesMap());
+                allWhiteMovesMap.putAll(pieces[i].getPossibleMovesMap());
             }
         }
     }
 
     public static void setAllBlackMoves(){
-        allBlackMoves.clear();
+        allBlackMovesMap.clear();
         Piece pieces[] =pieceTileMap.keySet().toArray(new Piece[pieceTileMap.size()]);
         for (int i =0;i<pieces.length;i++){
             if (pieces[i].getColor()== GameColor.BLACK){
-                allBlackMoves.putAll(pieces[i].getPossibleMovesMap());
+                allBlackMovesMap.putAll(pieces[i].getPossibleMovesMap());
             }
         }
     }
@@ -116,9 +153,9 @@ public class BoardUtil {
             for (int j =0; j<tiles[i].length;j++){
                 //if ((i+j)%2==0)
                 //{
-                    IntTiles.put(tileNumber,tiles[i][j]);
-                    StringTiles.put((label+String.valueOf(i+1)),tiles[i][j]);
-                    TileInt.put(tiles[i][j],positionNumber);
+                    IntTilesMap.put(tileNumber,tiles[i][j]);
+                    StringTilesMap.put((label+String.valueOf(i+1)),tiles[i][j]);
+                    TileIntMap.put(tiles[i][j],positionNumber);
                     tileNumber++;
                /* }
                 else {
@@ -134,7 +171,7 @@ public class BoardUtil {
     }
 
     public static Tile getTilebyString(String tile){
-        return StringTiles.get(tile);
+        return StringTilesMap.get(tile);
     }
 
     public static void setPieceTileMap(Board b){

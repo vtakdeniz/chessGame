@@ -4,8 +4,6 @@ import Util.BoardUtil;
 import Util.GameColor;
 import Util.Move;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -24,37 +22,40 @@ public class Board {
     }
 
     public int getTilePosition(Tile tile){
-        return BoardUtil.TileInt.get(tile);
+        return BoardUtil.TileIntMap.get(tile);
     }
 
-    public boolean isMoveCheck(Move m){
+    public boolean isMate(GameColor color){
+
+        return false;
+    }
+
+    public boolean isMoveCheck(GameColor color){
         boolean isCheck=false;
-        Piece p = m.destinationTile.piece;
-        p.setPossibleMoves();
-        Map allMoves = p.possibleMovesMap;
-        System.out.println("oynayan color "+p.getColor().getColor()+"   şahı poz :   "+BoardUtil.kingTileMap.get(p.getColor().getReverse()).position);
-        System.out.println("oynayan = "+p.getColor().getColor()+" ::  rakibi = "+p.getColor().getReverse().getColor());
-        Iterator<Tile> itr = allMoves.values().iterator();
+
+        Map allMoves = BoardUtil.getMoves(color);
+        /*Iterator<Tile> itr = allMoves.values().iterator();
         while (itr.hasNext()) {
             System.out.println(itr.next().position);
-        }
+        }*/
 
-        Tile kingPos = (Tile)(allMoves.get(BoardUtil.kingTileMap.get(p.getColor().getReverse()).position));
+        Tile kingPos = (Tile)(allMoves.get(BoardUtil.kingTileMap.get(color.getReverse()).position));
 
         if (kingPos!=null){
             isCheck=true;
-            System.out.println("This is ischeck method in board. This is check");
+            System.out.println("This is isMoveCheck method in board. This is check");
         }
 
         return isCheck;
     }
+
 
     public void printToTerminal(){
         BoardUtil.printToTerminal(this);
     }
 
     public Tile getTilebyString(String tileName){
-         return BoardUtil.StringTiles.get(tileName);
+         return BoardUtil.StringTilesMap.get(tileName);
     }
 
     public Tile getTileByInt(int tilecode){

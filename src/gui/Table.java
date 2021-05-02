@@ -24,7 +24,7 @@ import Util.*;
 public class Table {
     private final JFrame gameFrame;
     private static  BoardPanel boardPanel;
-    private final static Dimension OUTFRAMEDIMENSION = new Dimension(900,900);
+    private final static Dimension OUTFRAMEDIMENSION = new Dimension(750,750);
     private final static Dimension BOARD_PANEL_DIMENSION = new Dimension(700,650);
     private final static Dimension TILE_DIMENSION = new Dimension(30,30);
     private Color lightTileColor = Color.decode("#FFFFFF");
@@ -59,19 +59,20 @@ public class Table {
         currentPlayer=currentPlayer.getReverse();
     }
 
+
     public static void setPlayer(Player p){
         player=p;
         System.out.println("Player color is "+player.playerColor.name());
     }
 
     public static void executeRivalMove(Move m){
-        Move newMove= new Move(BoardUtil.IntTiles.get(m.startTile.position),BoardUtil.IntTiles.get(m.destinationTile.position));
+        Move newMove= new Move(BoardUtil.IntTilesMap.get(m.startTile.position),BoardUtil.IntTilesMap.get(m.destinationTile.position));
         boolean isSuccesfull;
 
         isSuccesfull=newMove.executeMove();
         if(isSuccesfull){
             togglePlayer();
-            chessBoard.isMoveCheck(newMove);
+            chessBoard.isMoveCheck(player.playerColor.getReverse());
         }
 
 
@@ -169,11 +170,11 @@ public class Table {
                         else{
 
                             destinationTile=chessBoard.getTileByInt(tileId);
-                            if (destinationTile!=selectedTile){
+                            if (destinationTile!=selectedTile&&selectedTile.piece!=null){
                                 Move move = new Move(selectedTile,destinationTile);
 
                                 boolean isSuccessful=false;
-                                if(currentPlayer== move.startTile.piece.getColor()&&currentPlayer==player.playerColor){
+                                if(currentPlayer== selectedTile.piece.getColor()&&currentPlayer==player.playerColor){
                                      isSuccessful=move.executeMove();
                                 }
                                 if(isSuccessful){
@@ -182,7 +183,7 @@ public class Table {
                                     Client.Send(s);
                                     togglePlayer();
 
-                                    if(chessBoard.isMoveCheck(move)){
+                                    if(chessBoard.isMoveCheck(player.playerColor)){
 
                                         System.out.println(player.playerColor+"   checked other player ");
                                     }
@@ -197,6 +198,7 @@ public class Table {
                             }
                             else
                             {
+                                selectedTile=null;
                                 destinationTile=null;
                             }
 
