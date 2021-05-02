@@ -67,13 +67,13 @@ public class Table {
 
     public static void executeRivalMove(Move m){
         Move newMove= new Move(BoardUtil.IntTilesMap.get(m.startTile.position),BoardUtil.IntTilesMap.get(m.destinationTile.position));
-        boolean isSuccesfull;
+        //boolean isSuccesfull;
 
-        isSuccesfull=newMove.executeMove();
-        if(isSuccesfull){
+        newMove.devExecuteMove();
+
             togglePlayer();
             chessBoard.isMoveCheck(player.playerColor.getReverse());
-        }
+
 
 
         SwingUtilities.invokeLater(new Runnable() {
@@ -170,7 +170,7 @@ public class Table {
                         else{
 
                             destinationTile=chessBoard.getTileByInt(tileId);
-                            if (destinationTile!=selectedTile&&selectedTile.piece!=null){
+                            if (destinationTile!=selectedTile&&selectedTile.piece!=null&&selectedTile!=null){
                                 Move move = new Move(selectedTile,destinationTile);
 
                                 boolean isSuccessful=false;
@@ -186,6 +186,11 @@ public class Table {
                                     if(chessBoard.isMoveCheck(player.playerColor)){
 
                                         System.out.println(player.playerColor+"   checked other player ");
+
+                                        if (chessBoard.isRivalMate(player.playerColor)){
+                                            System.out.println("This is is table method. Game is over.");
+                                        }
+
                                     }
                                     else{
                                         System.out.println(player.playerColor+"  couldnt check ");
@@ -198,8 +203,15 @@ public class Table {
                             }
                             else
                             {
+                                // DEBUG
+                                if (selectedTile.piece==null){
+                                    System.out.println("this is in table. selected piece is null");
+                                }
+
+
                                 selectedTile=null;
                                 destinationTile=null;
+                                selectedPiece=null;
                             }
 
                         }

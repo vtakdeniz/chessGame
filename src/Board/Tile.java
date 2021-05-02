@@ -8,11 +8,13 @@ public class Tile implements java.io.Serializable{
 
     protected GameColor gameColor;
     public final int position;
+    public final int tileCoordinate;
     public Piece piece;
 
-    public Tile(GameColor gameColor, int position) {
+    public Tile(GameColor gameColor, int position,int tileCoordinate) {
         this.gameColor = gameColor;
         this.position = position;
+        this.tileCoordinate=tileCoordinate;
     }
 
     public boolean isOccupied(){

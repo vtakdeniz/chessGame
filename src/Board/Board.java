@@ -25,8 +25,25 @@ public class Board {
         return BoardUtil.TileIntMap.get(tile);
     }
 
-    public boolean isMate(GameColor color){
+    public boolean isRivalMate(GameColor color){
+        Map allMoves = BoardUtil.getValidMoves(color.getReverse());
+        /*Iterator<Tile> itr = allMoves.values().iterator();
+        while (itr.hasNext()) {
+            System.out.println(itr.next().position);
+        }*/
 
+        if (allMoves.size()==0){
+            System.out.println("This is isRivalMate method in board. This is Mate");
+            return true;
+        }
+        else {
+
+            Iterator<Tile> itr = allMoves.values().iterator();
+            while (itr.hasNext()) {
+                System.out.println(itr.next().position);
+            }
+
+        }
         return false;
     }
 
@@ -70,16 +87,19 @@ public class Board {
 
     public void setTiles(){
         int tileNumber=12;
+        int tileCoordinate=1;
         for (int i =0; i<tiles.length;i++){
             for (int j =0; j<tiles[i].length;j++){
                 if ((i+j)%2==0)
                     {
-                    tiles[i][j]= new Tile(GameColor.BLACK,tileNumber);
+                    tiles[i][j]= new Tile(GameColor.BLACK,tileNumber,tileCoordinate);
                     tileNumber++;
+                    tileCoordinate++;
                      }
                 else {
-                    tiles[i][j]= new Tile(GameColor.WHITE,tileNumber);
+                    tiles[i][j]= new Tile(GameColor.WHITE,tileNumber,tileCoordinate);
                     tileNumber++;
+                    tileCoordinate++;
                      }
             }
 
