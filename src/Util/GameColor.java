@@ -1,5 +1,7 @@
 package Util;
 
+//This class holds ansii string of each color so that it is possible to print the board colorful to terminal
+//Also used in pieces colors.
 public enum GameColor {
 
      ANSI_RESET ,

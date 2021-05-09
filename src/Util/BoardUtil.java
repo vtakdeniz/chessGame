@@ -6,7 +6,11 @@ import Pieces.Piece;
 
 import java.util.*;
 
+//This class holds different mappings of chess board.
+//Also set tiles position mapping relative to a 10x10 chess board so that board can have a boundary.
+
 public class BoardUtil {
+
     public static Map<String, Tile> StringTilesMap = new HashMap<>();
     public static Map<Integer, Tile> IntTilesMap = new HashMap<>();
     public static Map<Tile, Integer> TileIntMap = new HashMap<>();
@@ -23,6 +27,7 @@ public class BoardUtil {
     public static Map<Integer,Tile> allBlackValidMoves = new HashMap<>();
 
 
+    //Returns all valid moves of one player based on color
     public static Map<Integer,Tile> getValidMoves(GameColor c){
         if (c== GameColor.BLACK){
             setAllValidBlackMovesMap();
@@ -143,6 +148,7 @@ public class BoardUtil {
         System.out.println("     | A || B || C || D || E || F || G || H |\n");
     }
 
+    //Sets tiles mapping
     public static void setMapping(Board b){
         int tileNumber=12;
         char label;
@@ -151,18 +157,10 @@ public class BoardUtil {
         for (int i =0; i<tiles.length;i++){
             label='a';
             for (int j =0; j<tiles[i].length;j++){
-                //if ((i+j)%2==0)
-                //{
                     IntTilesMap.put(tileNumber,tiles[i][j]);
                     StringTilesMap.put((label+String.valueOf(i+1)),tiles[i][j]);
                     TileIntMap.put(tiles[i][j],positionNumber);
                     tileNumber++;
-               /* }
-                else {
-                    IntTiles.put(tileNumber,tiles[i][j]);
-                    StringTiles.put((label+String.valueOf(i+1)),tiles[i][j]);
-                    tileNumber++;
-                }*/
                 label++;
             }
 
@@ -174,6 +172,7 @@ public class BoardUtil {
         return StringTilesMap.get(tile);
     }
 
+    //Sets pieces mappings
     public static void setPieceTileMap(Board b){
         Tile tiles [][]=b.getTiles();
         for (int i =0;i< 8;i++){

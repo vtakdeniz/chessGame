@@ -15,12 +15,12 @@ class ServerThread extends Thread {
     public void run() {
         while (!Server.serverSocket.isClosed()) {
             try {
-                Server.Display("Waiting for client");
+                Server.print("Waiting for client");
                 Socket clientSocket = Server.serverSocket.accept();
-                Server.Display("One client accepted");
-                SClient nclient = new SClient(clientSocket, Server.IdClient);
+                Server.print("One client accepted");
+                SClient nclient = new SClient(clientSocket, Server.client_id);
 
-                Server.IdClient++;
+                Server.client_id++;
                 Server.Clients.add(nclient);
                 nclient.listenThread.start();
                 nclient.pairThread.start();
@@ -35,43 +35,43 @@ class ServerThread extends Thread {
 public class Server {
 
     public static ServerSocket serverSocket;
-    public static int IdClient = 0;
+    public static int client_id = 0;
 
     public static int port = 0;
 
-    public static ServerThread runThread;
+    public static ServerThread main_thread;
 
     public static ArrayList<SClient> Clients = new ArrayList<>();
 
-    public static Semaphore pairTwo = new Semaphore(1, true);
+    public static Semaphore pairing = new Semaphore(1, true);
 
     public static void Start(int openport) {
         try {
             Server.port = openport;
             Server.serverSocket = new ServerSocket(Server.port);
 
-            Server.runThread = new ServerThread();
-            Server.runThread.start();
+            Server.main_thread = new ServerThread();
+            Server.main_thread.start();
 
         } catch (IOException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public static void Display(String msg) {
-
-        System.out.println(msg);
-
-    }
-
     public static void Send(SClient cl, Object msg) {
 
         try {
-            cl.sOutput.writeObject(msg);
+            cl.socketOutput.writeObject(msg);
         } catch (IOException ex) {
             Logger.getLogger(SClient.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
+    public static void print(String msg) {
+
+        System.out.println(msg);
+
+    }
+
+
 
 }

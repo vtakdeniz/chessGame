@@ -3,7 +3,7 @@ package Board;
 import Pieces.Piece;
 import Util.GameColor;
 
-
+// This class behaves as tiles in chessboard and holds pieces
 public class Tile implements java.io.Serializable{
 
     protected GameColor gameColor;

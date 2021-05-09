@@ -33,7 +33,8 @@ public abstract class Piece implements java.io.Serializable{
         return this.validMovesMap;
     }
 
-
+    //Valid moves are legal moves chosen from possible moves. This function cheks validity of every single possible move by
+    // simulating the execution and checking whether move puts king in vulnerable position.
     public void setValidMoves(){
         validMovesMap.clear();
         validMoves.clear();
@@ -49,7 +50,6 @@ public abstract class Piece implements java.io.Serializable{
             else{
                 destinationPiece=null;
             }
-            //startTilePiece = move.startTile.piece;
             move.startTile.piece=null;
             move.destinationTile.piece=this;
             Map<Integer,Tile> opponentMoves=BoardUtil.getMoves(this.gameColor.getReverse());
@@ -67,17 +67,10 @@ public abstract class Piece implements java.io.Serializable{
         BoardUtil.setMoves(this.gameColor.getReverse());
     }
 
-
-    //public abstract Map<Integer, Tile> getValidMovesMap();
-    /*public  Map<Integer, Tile> getValidMovesMap(){
-        return null;
-    }
-    public  ArrayList<Move> getValidMovesList(){
-        return null;
-    }
-*/
-
+    //Possible moves of pieces are every single tile a piece can go without colliding with a different piece or
+    //  getting out of chess board's bounds.
     public abstract void setPossibleMoves();
+
     public abstract ArrayList<Move> getPossibleMovesList();
     public abstract Map<Integer, Tile> getPossibleMovesMap();
     Piece(GameColor gameColor, String name, char code){

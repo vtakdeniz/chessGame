@@ -7,6 +7,8 @@ import Pieces.Piece;
 
 import java.util.Map;
 
+//This class checks the validity of moves and executes them by moving pieces from one tile to another
+
 public class Move implements java.io.Serializable{
     public Tile startTile;
     public Tile destinationTile;
@@ -26,21 +28,7 @@ public class Move implements java.io.Serializable{
         this.isAttackMove=isAttackMove;
     }
 
-    public boolean isValid(){
-        return false;
-    }
-
-    public boolean isCheck(){
-        Piece p = this.startTile.piece;
-        this.startTile.piece=null;
-        Map<Integer,Tile> opponentMoves = BoardUtil.getMoves(p.gameColor.getReverse());
-        if (opponentMoves.get(BoardUtil.kingTileMap.get(p.getColor()).position)!=null){
-           this.startTile.piece=p;
-           return true;
-        }
-        return false;
-    }
-
+    //Executes move without checking the validity
     public void devExecuteMove(){
         if(this.isAttackMove){
             BoardUtil.addCapturedPiece(destinationTile.piece);
@@ -58,6 +46,7 @@ public class Move implements java.io.Serializable{
         }
     }
 
+    //Execute move after checking the validity
     public boolean executeMove(){
         boolean isSuccessful=false;
         Piece p = this.startTile.piece;

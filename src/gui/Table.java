@@ -20,7 +20,7 @@ import Pieces.*;
 import Players.Player;
 import Util.*;
 
-
+// This is the projects gui that users interacts with.
 public class Table {
     private final JFrame gameFrame;
     private static  BoardPanel boardPanel;
@@ -54,17 +54,19 @@ public class Table {
       //Client.Start("127.0.0.1",2000);
     }
 
-
+    // Changes the player that is allowed to paly
     public static void togglePlayer(){
         currentPlayer=currentPlayer.getReverse();
     }
 
 
+    // Sets tables player
     public static void setPlayer(Player p){
         player=p;
         System.out.println("Player color is "+player.playerColor.name());
     }
 
+    //Executes rival's move that got send via server
     public static void executeRivalMove(Move m){
         Move newMove= new Move(BoardUtil.IntTilesMap.get(m.startTile.position),BoardUtil.IntTilesMap.get(m.destinationTile.position));
         //boolean isSuccesfull;
@@ -84,6 +86,7 @@ public class Table {
         });
     }
 
+    //Sets application menu
     private void setMenuBar(JMenuBar tableMenuBar){
         final JMenu menu = new JMenu("Menu");
 
@@ -102,6 +105,7 @@ public class Table {
     }
 
 
+    // Board panel holds collection of tiles and displays main board
     private class BoardPanel extends JPanel{
         final List<TilePanel> boardTiles;
         BoardPanel(){
@@ -121,6 +125,7 @@ public class Table {
             validate();
         }
 
+        //Draws board to gui
         public void drawBoard(final Board board){
             removeAll();
             for (final TilePanel tilePanel:boardTiles){
@@ -133,6 +138,7 @@ public class Table {
     }
 
 
+    //This class represents each tile cell in BoardPanel
     private class TilePanel extends JPanel{
         private final int tileId;
         boolean pressed;
@@ -144,7 +150,8 @@ public class Table {
             setTileColor();
             setTileIcon(chessBoard);
 
-
+            // Since mouse cliked won't register clicks if you move the mouse even by 1px during a click,
+            //    i used combinaton of different listeners to achieve correct clicking function.
             addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -238,6 +245,7 @@ public class Table {
             validate();
         }
 
+        //Draws single tile
         public void drawTile(final Board board){
             setTileColor();
             setTileIcon(board);
@@ -245,6 +253,7 @@ public class Table {
             repaint();
         }
 
+        //Sets tiles piece image
         private void setTileIcon(Board board)  {
             this.removeAll();
             if(board.getTileByInt(this.tileId).isOccupied()){
@@ -258,6 +267,7 @@ public class Table {
             }
         }
 
+        //Sets tile color based on it's position
         private void setTileColor(){
             boolean isLight = ((tileId + (tileId-1)  / 8) % 2 == 0);
             setBackground(isLight ? lightTileColor : darkTileColor);

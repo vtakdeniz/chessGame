@@ -7,6 +7,7 @@ import Util.Move;
 import java.util.Iterator;
 import java.util.Map;
 
+// This classes behaves as chessboard and functions as interface between tiles and move execution
 public class Board {
 
     Tile tiles [][];
@@ -21,16 +22,14 @@ public class Board {
         BoardUtil.setPieceTileMap(this);
     }
 
+    // returns tiles mapped position
     public int getTilePosition(Tile tile){
         return BoardUtil.TileIntMap.get(tile);
     }
 
+    //checks whether the rival is mate after move execution
     public boolean isRivalMate(GameColor color){
         Map allMoves = BoardUtil.getValidMoves(color.getReverse());
-        /*Iterator<Tile> itr = allMoves.values().iterator();
-        while (itr.hasNext()) {
-            System.out.println(itr.next().position);
-        }*/
 
         if (allMoves.size()==0){
             System.out.println("This is isRivalMate method in board. This is Mate");
@@ -47,14 +46,11 @@ public class Board {
         return false;
     }
 
+    //checks whether move caused checl
     public boolean isMoveCheck(GameColor color){
         boolean isCheck=false;
 
         Map allMoves = BoardUtil.getMoves(color);
-        /*Iterator<Tile> itr = allMoves.values().iterator();
-        while (itr.hasNext()) {
-            System.out.println(itr.next().position);
-        }*/
 
         Tile kingPos = (Tile)(allMoves.get(BoardUtil.kingTileMap.get(color.getReverse()).position));
 
@@ -67,10 +63,12 @@ public class Board {
     }
 
 
+    // prints the board to terminal
     public void printToTerminal(){
         BoardUtil.printToTerminal(this);
     }
 
+    // returns the tile whose position given as chess coordinates like ; b2, a5, c8
     public Tile getTilebyString(String tileName){
          return BoardUtil.StringTilesMap.get(tileName);
     }
@@ -85,6 +83,7 @@ public class Board {
         return this.tiles;
     }
 
+    // sets tiles on board and their coordinates
     public void setTiles(){
         int tileNumber=12;
         int tileCoordinate=1;
@@ -110,6 +109,7 @@ public class Board {
 
 
 
+    //sets tiles pieces
     public void setPieces(){
         tiles[0][0].piece= new Rook(GameColor.WHITE);
         tiles[0][1].piece= new Knight(GameColor.WHITE);
